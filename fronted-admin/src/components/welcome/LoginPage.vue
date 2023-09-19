@@ -14,6 +14,19 @@
                     <el-icon><Lock /></el-icon>
                 </template>
             </el-input>
+            <span style="display: inline">
+                <input type="text" name="imageCode" placeholder="验证码" style="width: 50%;"/>
+                <img src="/code/image"/>
+            </span>
+            <div class="code" @click="refreshCode" title="刷新验证码">
+                <img class="verification-code" :src="verificationUrl" alt="验证码" />
+            </div>
+            <el-input placeholder="请输入验证码"
+                      v-model="userForm.captcha"
+                      onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"
+                      @keyup.enter="submitForm()"
+                      maxlength=20>
+            </el-input>
         </div>
         <div style="margin-top: 5px">
             <el-row style="display: flex;justify-items: center ;align-items: center">
@@ -21,7 +34,7 @@
                     <el-checkbox v-model="form.remember" label="记住我"/>
                 </el-col>
                 <el-col :span="12">
-                    <el-link @click="router.push('forget')"  >忘记密码?</el-link>
+                    <el-link @click="router.push('forget')">忘记密码?</el-link>
                 </el-col>
             </el-row>
         </div>
@@ -41,6 +54,10 @@
 
 <style>
 /*alert 成功弹出框样式*/
+.verification-code {
+    vertical-align: middle;
+    cursor: pointer;
+}
 </style>
 
 <script setup>
@@ -49,6 +66,8 @@ import {reactive} from "vue";
 import {ElMessage} from "element-plus";
 import router from "@/router";
 import {post} from "@/net";
+//import { Service } from "@basic-library";
+
 
 const form = reactive({
     username:'',
@@ -70,4 +89,20 @@ const login = () =>{
         })
     }
 }
+
+
+// 验证码请求地址
+const verificationUrl = ref()
+
+/**
+ * 点击刷新
+ */
+const refreshCode = async (params) => {
+    verificationUrl.value = Service.parse('queryCaptcha')
+}
+
+defineExpose({
+    refreshCode,
+});
+
 </script>

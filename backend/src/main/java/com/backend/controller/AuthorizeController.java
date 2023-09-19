@@ -29,6 +29,7 @@ public class AuthorizeController {
 
         System.out.println("这里");
         String s =  service.sendValidateEmail(email,session.getId(),false);
+
         if(s == null)
             return RestBean.success("邮件已发送,请注意查收");
         else

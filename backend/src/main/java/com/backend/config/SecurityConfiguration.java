@@ -40,7 +40,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http,PersistentTokenRepository repository) throws Exception {
         return http
                 .authorizeHttpRequests()
-                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/auth/**","/code/image").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -75,7 +75,7 @@ public class SecurityConfiguration {
         //设定数据源
         jdbcTokenRepository.setDataSource(dataSource);
         //一开始创建表,后面改成false
-        jdbcTokenRepository.setCreateTableOnStartup(true);
+        jdbcTokenRepository.setCreateTableOnStartup(false);
         return jdbcTokenRepository;
     }
 
