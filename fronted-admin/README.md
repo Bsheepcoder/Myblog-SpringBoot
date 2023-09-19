@@ -46,3 +46,8 @@ npm install --save axios vue-axios
 ```shell
 npm install pinia
 ```
+
+### editor.md
+```shell
+npm install editor.md
+```

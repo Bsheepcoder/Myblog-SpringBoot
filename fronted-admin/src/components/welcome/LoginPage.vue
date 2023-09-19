@@ -14,24 +14,20 @@
                     <el-icon><Lock /></el-icon>
                 </template>
             </el-input>
-            <span style="display: inline">
-                <input type="text" name="imageCode" placeholder="验证码" style="width: 50%;"/>
-                <img src="/code/image"/>
-            </span>
-            <div class="code" @click="refreshCode" title="刷新验证码">
-                <img class="verification-code" :src="verificationUrl" alt="验证码" />
-            </div>
-            <el-input placeholder="请输入验证码"
-                      v-model="userForm.captcha"
-                      onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"
-                      @keyup.enter="submitForm()"
-                      maxlength=20>
-            </el-input>
         </div>
-        <div style="margin-top: 5px">
+        <div style="margin-top: 10px">
+            <div  style="display: flex;justify-items: center ;align-items: center;margin-left: 100px">
+                <el-input v-model="code.imageCode" type="text" placeholder="请输入验证码"></el-input>
+                <div class="code" @click="refreshCode" title="刷新验证码" style="margin-left: 40px">
+                    <img class="verification-code" :src="verificationUrl" alt="验证码" />
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 10px">
             <el-row style="display: flex;justify-items: center ;align-items: center">
                 <el-col :span="12">
                     <el-checkbox v-model="form.remember" label="记住我"/>
+                    <span style="display: inline" ></span>
                 </el-col>
                 <el-col :span="12">
                     <el-link @click="router.push('forget')">忘记密码?</el-link>
@@ -62,27 +58,37 @@
 
 <script setup>
 import {Lock, User} from "@element-plus/icons-vue";
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 import {ElMessage} from "element-plus";
 import router from "@/router";
-import {post} from "@/net";
+import {get, post} from "@/net";
+import axios from "axios";
 //import { Service } from "@basic-library";
 
 
 const form = reactive({
     username:'',
     password:'',
-    remember:false
+    remember:false,
+    imageCode:'',
 })
 
+const code = reactive(
+    {
+        nowCode:'',
+    }
+)
+
 const login = () =>{
+
     if(!form.username || !form.password){
         ElMessage.warning('请填写用户名和密码！')
     }else{
         post('/api/auth/login',{
             username:form.username,
             password:form.password,
-            remember:form.remember
+            remember:form.remember,
+            imageCode:form.imageCode,
         }, (message)=>{
             ElMessage.success(message)
             router.push('/index')
@@ -98,11 +104,16 @@ const verificationUrl = ref()
  * 点击刷新
  */
 const refreshCode = async (params) => {
-    verificationUrl.value = Service.parse('queryCaptcha')
+    get('/code/image',(msg)=>{
+        console.log(msg)
+        verificationUrl.value  = window.URL.createObjectURL(msg)
+    })
 }
 
-defineExpose({
-    refreshCode,
-});
+
+//
+// defineExpose({
+//     refreshCode,
+// });
 
 </script>

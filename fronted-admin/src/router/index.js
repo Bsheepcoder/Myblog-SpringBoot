@@ -29,6 +29,15 @@ const router = createRouter({
             name:'index',
             component:() => import('@/views/IndexView.vue'),
             children:[
+                {
+                    path:'/createArticle',
+                    name:'createArticle',
+                    component:()=>import('@/components/article/createArticle.vue')
+                },{
+                    path:'/ArticleList',
+                    name:'ArticleList',
+                    component:()=>import('@/components/article/ArticleList.vue')
+                },
             ]
         }
     ]
