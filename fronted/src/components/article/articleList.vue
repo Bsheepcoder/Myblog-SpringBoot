@@ -7,8 +7,13 @@
         <el-card  class="box-card">
             <template #header>
                 <div class="card-header">
-                    <span>Card name11111111111111111111111111111111</span>
+                    <span>title</span>
                     <el-button class="button" text>查看文章</el-button>
+                </div>
+            </template>
+            <template #default>
+                <div class="card-content">
+                    <span>content</span>
                 </div>
             </template>
         </el-card>
@@ -19,6 +24,7 @@
 .card{
     margin-top: 12px;
     box-shadow: 1px 2px 5px gray;
+
 }
 .card-header {
     display: flex;
@@ -26,5 +32,6 @@
     align-items: center;
 }
 .box-card {
+    height: 150px;
 }
 </style>

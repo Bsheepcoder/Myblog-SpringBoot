@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/blog.iml" filepath="$PROJECT_DIR$/blog.iml" />
       <module fileurl="file://$PROJECT_DIR$/fronted.iml" filepath="$PROJECT_DIR$/fronted.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fronted-admin.iml" filepath="$PROJECT_DIR$/fronted-admin.iml" />
     </modules>
   </component>
 </project>

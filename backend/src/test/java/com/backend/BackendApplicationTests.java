@@ -1,6 +1,5 @@
 package com.backend;
 
-import com.backend.entity.User;
 import com.backend.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
