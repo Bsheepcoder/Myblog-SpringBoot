@@ -1,32 +1,60 @@
 <template>
 <div>
     <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="title" label="文章标题" width="180" />
-        <el-table-column prop="tag" label="文章标签" width="180" />
-        <el-table-column prop="datetime" label="创建时间" />
-        <el-table-column prop="overview" label="文章概览" />
+        <el-table-column label="文章标题" prop="title" />
+        <el-table-column label="文章标签" prop="tag" />
+        <el-table-column label="创建时间" prop="datetime" />
+        <el-table-column label="文章概览" prop="overview" />
+        <el-table-column align="right">
+            <template #header>
+                <el-input v-model="search" size="small" placeholder="Type to search" />
+            </template>
+            <template #default="scope">
+                <el-button size="small" @click=""
+                >Edit</el-button
+                >
+                <el-button
+                    size="small"
+                    type="danger"
+                    @click=""
+                >Delete</el-button
+                >
+            </template>
+        </el-table-column>
     </el-table>
 </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import {get} from "@/net";
-import {onMounted, reactive, ref} from "vue";
+import {computed, createApp, onMounted, reactive, ref} from "vue";
+import {ElMessage} from "element-plus";
 
 
-let tableData = ref([]);
+const search = ref('')
 
-const fetchData = () =>{
-    get('/api/article/list',(msg)=>{
-        console.log(msg)
-        tableData = msg
-    })
+
+const tableData = ref([]);
+
+
+const fetchData = () => {
+    get('/api/article/list', (msg) => {
+        console.log(msg);
+        console.log(typeof msg);
+        tableData.value = msg; // 使用ref的.value属性来更新数据
+    });
 }
 
-
 onMounted(() => {
-    fetchData(); // 在组件挂载后调用 fetchData 方法
+    fetchData(); // 在组件挂载后调用获取数据的函数
 });
+
+// let data  = []
+// get('/api/article/list',(msg)=>{
+//     console.log(msg)
+//    console.log(typeof msg)
+//     data = msg
+// })
 
 </script>
 

@@ -30,8 +30,8 @@
                             class="el-menu-vertical-demo"
                             default-active="2"
                             text-color="#fff"
-                            @open="handleOpen"
-                            @close="handleClose"
+                            @open=""
+                            @close=""
                     >
                         <el-sub-menu index="1">
                             <template #title>
