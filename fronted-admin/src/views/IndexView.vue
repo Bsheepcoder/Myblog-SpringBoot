@@ -38,25 +38,26 @@
                                 <el-icon><location /></el-icon>
                                 <span>文章管理</span>
                             </template>
-                                <el-menu-item index="1-1"
+                                <el-menu-item index="1-1" @click="router.push('/ArticleList')">文章列表</el-menu-item>
+                                <el-menu-item index="1-2"
                                               @click="router.push('/createArticle')"
                                 >创建文章</el-menu-item>
-                                <el-menu-item index="1-2" @click="router.push('/ArticleList')">文章列表</el-menu-item>
                                 <el-menu-item index="1-3">其他</el-menu-item>
                         </el-sub-menu>
                         <el-sub-menu index="2">
                             <template #title>
                                 <el-icon><icon-menu /></el-icon>
-                                <span>用户管理</span>
+                                <span>标签管理</span>
                             </template>
-                            <el-menu-item index="2-1">用户列表</el-menu-item>
+                            <el-menu-item index="3-1" @click="router.push('/taglist')">标签列表</el-menu-item>
+                            <el-menu-item index="3-2">添加标签</el-menu-item>
                         </el-sub-menu>
                         <el-sub-menu index="3">
                             <template #title>
                                 <el-icon><icon-menu /></el-icon>
-                                <span>数据治理</span>
+                                <span>用户管理</span>
                             </template>
-                                <el-menu-item index="3-1">item one</el-menu-item>
+                            <el-menu-item index="2-1">用户列表</el-menu-item>
                         </el-sub-menu>
                     </el-menu>
                 </el-aside>

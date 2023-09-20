@@ -11,9 +11,8 @@
             <el-input v-model="form.title" />
         </el-form-item>
         <el-form-item label="文章标签">
-            <el-select v-model="form.tag" placeholder="please select your zone">
-                <el-option label="Zone one" value="shanghai" />
-                <el-option label="Zone two" value="beijing" />
+            <el-select v-model="form.tag" placeholder="选择标签">
+                <el-option label="默认" value="2" />
             </el-select>
         </el-form-item>
         <el-form-item label="文章概述">
@@ -41,7 +40,7 @@ const form = reactive({
     currentTime:new Date(),
 })
 
-const text = ref('# 标题  \n  ### 标题')
+const text = ref('.....请输入')
 
 
 const onSubmit = () => {

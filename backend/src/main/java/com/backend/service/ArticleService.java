@@ -13,4 +13,10 @@ public interface ArticleService {
 
     List<ArticleView> getArticleList();
     public boolean addArticle(String title, int tag, Date datetime, String overview, String text, int authorid);
+
+    public boolean deleteArticle(int aid);
+
+    public boolean updateArticle(int aid ,String title,int tag,Date datetime,String overview,String text);
+
+    public Article getArticle(int aid);
 }

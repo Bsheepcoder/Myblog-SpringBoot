@@ -38,4 +38,38 @@ public class ArticleController {
     public RestBean<List<ArticleView>> getArticleList(){
         return RestBean.success(articleService.getArticleList());
     }
+
+    @GetMapping("/page")
+    public RestBean<Article> getArticle(@RequestParam("aid") int aid){
+        Article article = articleService.getArticle(aid);
+        if(article != null){
+            return RestBean.success(article);
+        }
+        return RestBean.failure(500,null);
+    }
+
+    @GetMapping("/delete")
+    public RestBean<String> deleteArticle(@RequestParam("aid") int aid){
+        boolean flag = articleService.deleteArticle(aid);
+        if(flag){
+            return RestBean.success("已经删除" + aid);
+        }
+        return RestBean.failure(500,"接口删除文章失败");
+    }
+
+    @GetMapping("/update")
+    public RestBean<String> updateArticle(@RequestParam("aid") int aid,
+                                          @RequestParam("title") String title,
+                                          @RequestParam("tag") int tag,
+                                          @RequestParam("overview") String overview,
+                                          @RequestParam("text") String text
+    ){
+        Date time = new java.sql.Date(new java.util.Date().getTime());
+        boolean flag = articleService.updateArticle(aid,title,tag,time,overview,text);
+        if(flag){
+            return RestBean.success("已经更新" + aid);
+        }
+        return RestBean.failure(500,"接口更新文章失败");
+    }
+
 }
