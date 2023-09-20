@@ -1,6 +1,7 @@
 package com.backend.service.Impl;
 
 import com.backend.entity.Article;
+import com.backend.entity.ArticleView;
 import com.backend.mapper.AritcleMapper;
 import com.backend.service.ArticleService;
 import jakarta.annotation.Resource;
@@ -17,13 +18,12 @@ public class ArticleServiceImpl  implements ArticleService {
     AritcleMapper aritcleMapper;
 
     @Override
-    public List<Article> getArticleList() {
+    public List<ArticleView> getArticleList() {
         return aritcleMapper.getArticleList();
     }
 
     @Override
-    public void addArticle(String title, int tag, Date datetime, String overview, String text, int autherid) {
-        aritcleMapper.addArticle(title,tag,datetime,overview,text,autherid);
-        return ;
+    public boolean addArticle(String title, int tag, Date datetime, String overview, String text, int authorid) {
+        return aritcleMapper.addArticle(title,tag,datetime,overview,text,authorid);
     }
 }

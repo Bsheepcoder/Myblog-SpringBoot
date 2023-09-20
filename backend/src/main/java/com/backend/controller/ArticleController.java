@@ -1,6 +1,7 @@
 package com.backend.controller;
 
 import com.backend.entity.Article;
+import com.backend.entity.ArticleView;
 import com.backend.entity.RestBean;
 import com.backend.service.ArticleService;
 import jakarta.annotation.Resource;
@@ -27,12 +28,14 @@ public class ArticleController {
                                        @RequestParam("text") String text){
 
         Date time = new java.sql.Date(new java.util.Date().getTime());
-        articleService.addArticle(title,tag,time,overview,text,1);
-        return RestBean.success("添加成功！");
+        if(articleService.addArticle(title,tag,time,overview,text,1)){
+            return RestBean.success("添加成功！");
+        }
+        return RestBean.failure(500,"接口添加失败！");
     }
 
     @GetMapping("/list")
-    public RestBean<List<Article>> getArticleList(){
+    public RestBean<List<ArticleView>> getArticleList(){
         return RestBean.success(articleService.getArticleList());
     }
 }
