@@ -47,7 +47,7 @@ public class SecurityConfiguration {
         return http
                 .addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests()
-                .requestMatchers("/api/auth/**","/code/image").permitAll()
+                .requestMatchers("/api/auth/**","/code/image","/api/article/**","/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

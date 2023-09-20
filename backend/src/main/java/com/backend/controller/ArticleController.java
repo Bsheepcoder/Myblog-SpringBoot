@@ -32,7 +32,7 @@ public class ArticleController {
     }
 
     @GetMapping("/list")
-    public RestBean<String> getArticleList(){
-        return RestBean.success("成功");
+    public RestBean<List<Article>> getArticleList(){
+        return RestBean.success(articleService.getArticleList());
     }
 }
