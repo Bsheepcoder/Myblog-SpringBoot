@@ -22,12 +22,12 @@ public class ArticleController {
 
     @PostMapping ("/add")
     public RestBean<String> addArticle(@RequestParam("title") String title,
-                                       @RequestParam("tag") String tag,
+                                       @RequestParam("tag") int tag,
                                        @RequestParam("overview") String overview,
                                        @RequestParam("text") String text){
 
         Date time = new java.sql.Date(new java.util.Date().getTime());
-        articleService.addArticle(new Article(title,tag,time,overview,text));
+        articleService.addArticle(title,tag,time,overview,text,1);
         return RestBean.success("添加成功！");
     }
 

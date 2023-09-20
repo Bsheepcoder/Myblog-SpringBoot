@@ -7,6 +7,7 @@ import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,8 +22,8 @@ public class ArticleServiceImpl  implements ArticleService {
     }
 
     @Override
-    public void addArticle(Article atc) {
-        aritcleMapper.addArticle(atc.getTitle(),atc.getTag(),atc.getDatetime(),atc.getOverview(),atc.getText());
+    public void addArticle(String title, int tag, Date datetime, String overview, String text, int autherid) {
+        aritcleMapper.addArticle(title,tag,datetime,overview,text,autherid);
         return ;
     }
 }
