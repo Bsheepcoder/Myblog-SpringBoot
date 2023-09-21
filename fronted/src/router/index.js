@@ -8,6 +8,16 @@ const router = createRouter({
             name:'index',
             component:() => import('@/views/indexView.vue'),
             children:[
+                {
+                    path:'/',
+                    name:'ArticleList',
+                    component:()=>import('@/components/ArticleList.vue')
+                },  {
+                    path:'/page/:aid',
+                    name:'ArticleDetail',
+                    component:()=>import('@/components/ArticleDetail.vue'),
+                    aid:0,
+                },
             ]
         }
     ]

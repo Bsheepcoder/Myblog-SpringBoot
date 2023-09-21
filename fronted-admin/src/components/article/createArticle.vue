@@ -51,7 +51,7 @@ const onSubmit = () => {
             title:form.title,
             tag:form.tag,
             overview:form.overview,
-            text:text,
+            text:text.value,
         }, (message)=>{
             ElMessage.success(message)
             router.push('/articleList')
