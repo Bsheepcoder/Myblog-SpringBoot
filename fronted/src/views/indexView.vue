@@ -3,6 +3,9 @@
         <el-container >
             <el-header class="el-page-header" style="display: block;background-color: #0e0e0e;
             background-image: linear-gradient(130deg,#155899,#15945c);text-align: center;height: 300px">
+                <div style="font-family: monospace;margin-top: 120px;font-size: 36px">
+                    share coding thoughts
+                </div>
             </el-header>
             <el-main>
                     <div style="margin-right: auto;margin-left: auto;text-align: center;width:1000px;padding: 10px;border-radius: 6px">

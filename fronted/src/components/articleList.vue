@@ -5,10 +5,10 @@
         <el-card v-for="o in tableData" :key="o"  :data="tableData" class="box-card"   shadow="hover"  @click="getin(o.aid)" >
             <div style="height: 100%;width: 100%">
                 <div class="card-header"  >
-                    {{o.title}} Find my hobby
+                    {{o.title}}
                 </div>
                 <div  class="card-overview">
-                    {{o.valueOf()}}
+                    文章概要：{{o.overview}}
                 </div>
             </div>
         </el-card>

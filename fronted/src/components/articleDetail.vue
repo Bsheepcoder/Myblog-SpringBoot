@@ -61,7 +61,6 @@ onMounted(() => {
         console.log(message)
         pageinfo.value = message
         text1.value = pageinfo.value.text
-        ElMessage.success("文章显示成功");
     });
     top.value = window.scrollY;
     window.addEventListener('scroll', handleWindowScroll);
