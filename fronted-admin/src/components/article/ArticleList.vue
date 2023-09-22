@@ -45,16 +45,17 @@ const fetchData = () => {
     });
 }
 
+const deletePage = () =>{
+
+}
+
+
+
 onMounted(() => {
     fetchData(); // 在组件挂载后调用获取数据的函数
 });
 
-// let data  = []
-// get('/api/article/list',(msg)=>{
-//     console.log(msg)
-//    console.log(typeof msg)
-//     data = msg
-// })
+
 
 </script>
 
