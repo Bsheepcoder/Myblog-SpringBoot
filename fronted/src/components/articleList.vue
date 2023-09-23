@@ -3,12 +3,13 @@
 
     <div>
         <el-card v-for="o in tableData" :key="o"  :data="tableData" class="box-card"   shadow="hover"  @click="getin(o.aid)" >
-            <div style="height: 100%;width: 100%">
-                <div class="card-header"  >
-                    {{o.title}}
+            <div style="height: 100%;width: 100%;">
+                <div class="card-header">
+                    <div>{{o.title}}</div>
                 </div>
                 <div  class="card-overview">
-                    文章概要：{{o.overview}}
+                    <span style="font-weight: bolder">文章概要：</span>
+                        {{o.overview}}
                 </div>
             </div>
         </el-card>
@@ -42,16 +43,13 @@ onMounted(() => {
 .card-header {
     justify-content: space-between;
     align-items: center;
-    height: 50px;
     font-size: 31px;
-    font-weight: bolder;
     font-family: 'Trebuchet MS', sans-serif;
 
 }
 .card-overview{
     font-family: Tahoma, sans-serif;
     text-align: left;
-    display: flex;
     margin-top: 20px;
     font-size: 18px;
 }
@@ -69,7 +67,7 @@ onMounted(() => {
     border-radius: 10px;
     padding: 10px;
     font-family: 微软雅黑,serif;
-    height: 200px;
+    height: 100%;
 }
 
 

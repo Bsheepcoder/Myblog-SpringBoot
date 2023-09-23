@@ -7,7 +7,7 @@ import router from "@/router";
 import axios from "axios";
 const app = createApp(App)
 
-axios.defaults.baseURL = 'http://111.229.16.141:8081'
+axios.defaults.baseURL = 'http://localhost:8081'
 app.use(ElementPlus)
 app.use(router)
 app.mount('#app')
