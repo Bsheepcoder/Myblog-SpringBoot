@@ -1,6 +1,5 @@
 <template>
   <div>
-
       <el-card class="box-card">
           <div style="display:flex;justify-content: space-between;align-items: center;height: 40px;margin: 2px" >
               <el-button type="primary" @click="router.back()">返回</el-button>
@@ -11,14 +10,27 @@
 
           <el-container  class="page-container">
               <el-row>
-                  <el-col :span="18" class="content">   <MdPreview :editorId="id" :modelValue="text1" /></el-col>
-                  <el-col :span="6">
+
+                  <el-col  class="col-block" :xs="24" :sm="24" :md="18" :lg="18" :xl="18"  >
+                      <MdPreview :editorId="id" :modelValue="text1" />
+                  </el-col>
+                  <el-col   class="col-block"  :xs="0" :sm="0" :md="6" :lg="6" :xl="6"  >
                       <div class="app" style="background-color: #155899">
                           <div class="movable-div" :style="{ top: top + 'px' }">
                               <MdCatalog :editorId="id" :scrollElement="scrollElement" />
                           </div>
                       </div>
                   </el-col>
+
+
+<!--                  <el-col :span="18" class="content">   <MdPreview :editorId="id" :modelValue="text1" /></el-col>-->
+<!--                  <el-col :span="6">-->
+<!--                      <div class="app" style="background-color: #155899">-->
+<!--                          <div class="movable-div" :style="{ top: top + 'px' }">-->
+<!--                              <MdCatalog :editorId="id" :scrollElement="scrollElement" />-->
+<!--                          </div>-->
+<!--                      </div>-->
+<!--                  </el-col>-->
               </el-row>
           </el-container>
           <div class="page-footer">
@@ -36,6 +48,7 @@ import router from "@/router";
 import {MdEditor} from 'md-editor-v3';
 import 'md-editor-v3/lib/preview.css';
 import { MdPreview, MdCatalog } from 'md-editor-v3';
+import AboutMeCard from "./aboutMeCard.vue";
 
 const id = 'preview-only';
 const text1 = ref('# Hello Editor');
@@ -75,7 +88,9 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-
+.box-card{
+    margin: 5px;
+}
 .page-header{
     font-family: 微软雅黑;
     font-size: 30px;

@@ -3,21 +3,40 @@
         <el-container >
             <el-header class="el-page-header" style="display: block;background-color: #0e0e0e;
             background-image: linear-gradient(130deg,#155899,#15945c);text-align: center;height: 300px">
-                <div style="font-family: monospace;margin-top: 120px;font-size: 36px">
+                <div style="margin:20px;border: 1px solid black;text-align: right">
+                    <el-switch
+                        v-model="value"
+                        size="large"
+                        active-text="夜晚"
+                        inactive-text="白天"
+                    />
+                </div>
+                <div style="font-family: monospace;margin-top: 80px;font-size: 36px">
                     share coding thoughts
                 </div>
+
+
             </el-header>
             <el-main>
+
                 <el-container>
-                    <div style="margin-right: auto;margin-left: auto;text-align: center;width:1000px;padding: 10px;border-radius: 6px;align-items: center">
-                        <router-view v-slot="{ Component }">
-                            <transition name="el-fade-in-linear">
-                                <component :is="Component" />
-                            </transition>
-                        </router-view>
+                    <div style="margin-right: auto;margin-left: auto;text-align: center;width:1400px;border-radius: 6px;align-items: center;">
+                        <el-row>
+                            <el-col  class="col-block" :xs="0" :sm="0" :md="6" :lg="6" :xl="6"  >
+                               <aboutMeCard></aboutMeCard>
+                                <MdCatalog :editorId="id" :scrollElement="scrollElement" />
+                            </el-col>
+                            <el-col   class="col-block"  :xs="24" :sm="24" :md="18" :lg="18" :xl="18"  >
+                                <router-view v-slot="{ Component }">
+                                    <transition name="el-fade-in-linear">
+                                        <component :is="Component" />
+                                    </transition>
+                                </router-view>
+                            </el-col>
+                        </el-row>
                     </div>
                 </el-container>
-
+                <el-backtop :right="100" :bottom="100" />
             </el-main>
             <el-footer>
             </el-footer>
@@ -28,6 +47,10 @@
 <script lang="ts" setup>
 
 
+import AboutMeCard from "../components/aboutMeCard.vue";
+import {ref} from "vue";
+import {MdCatalog} from "md-editor-v3";
+const value = ref(true)
 </script>
 
 <style scoped>
@@ -41,5 +64,6 @@ img {
 img:nth-of-type(3) {
     margin-right: 0;
 }
+
 </style>
     

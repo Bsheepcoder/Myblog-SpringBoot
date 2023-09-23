@@ -62,8 +62,8 @@ onMounted(() => {
 }
 
 .box-card {
-
-    margin-top: 20px;
+    margin: 5px;
+    margin-bottom: 20px;
     border-radius: 10px;
     padding: 10px;
     font-family: 微软雅黑,serif;
