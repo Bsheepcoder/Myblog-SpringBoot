@@ -1,6 +1,7 @@
 <template>
 <div>
-    <el-table :data="tableData" style="width: 100%">
+    <el-table :data="tableData" style="">
+        <el-table-column label="文章ID" prop="aid" />
         <el-table-column label="文章标题" prop="title" />
         <el-table-column label="文章标签" prop="tag" />
         <el-table-column label="创建时间" prop="datetime" />
@@ -11,13 +12,13 @@
             </template>
             <template #default="scope">
                 <el-button size="small" @click=""
-                >Edit</el-button
+                >编辑文章</el-button
                 >
                 <el-button
                     size="small"
                     type="danger"
-                    @click=""
-                >Delete</el-button
+                    @click="deletePage(scope.row.aid)"
+                >删除文章</el-button
                 >
             </template>
         </el-table-column>
@@ -45,8 +46,10 @@ const fetchData = () => {
     });
 }
 
-const deletePage = () =>{
-
+const deletePage = (e) =>{
+    get('/api/article/delete?aid=' + e, (msg) => {
+        console.log(msg)
+    });
 }
 
 
