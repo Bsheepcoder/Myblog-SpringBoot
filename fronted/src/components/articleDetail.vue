@@ -8,16 +8,15 @@
 
           <h1 class="page-header">{{pageinfo.title}}</h1>
           <p  class="page-time">最后更新：{{pageinfo.datetime}}</p>
-          <p  class="page-overview">{{pageinfo.overview}}</p>
 
           <el-container  class="page-container">
               <el-row>
-                  <el-col :span="18">   <MdPreview :editorId="id" :modelValue="text1" /></el-col>
+                  <el-col :span="18" class="content">   <MdPreview :editorId="id" :modelValue="text1" /></el-col>
                   <el-col :span="6">
-                      <div class="app">
-                      <div class="movable-div" :style="{ top: top + 'px' }">
-                          <MdCatalog :editorId="id" :scrollElement="scrollElement" />
-                      </div>
+                      <div class="app" style="background-color: #155899">
+                          <div class="movable-div" :style="{ top: top + 'px' }">
+                              <MdCatalog :editorId="id" :scrollElement="scrollElement" />
+                          </div>
                       </div>
                   </el-col>
               </el-row>
@@ -88,6 +87,8 @@ onBeforeUnmount(() => {
 .page-container{
     display: flex;
     text-align: left;
+    padding: 0;
+    margin: 0;
 }
 
 .page-footer{
@@ -100,6 +101,19 @@ onBeforeUnmount(() => {
     position: absolute;
     cursor: move;
     user-select: none;
+}
+
+
+@media screen and (max-width: 467px) {
+    .movable-div {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 168px) {
+    .movable-div {
+        width: 50%;
+    }
 }
 </style>
     

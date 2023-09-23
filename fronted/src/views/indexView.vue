@@ -8,13 +8,16 @@
                 </div>
             </el-header>
             <el-main>
-                    <div style="margin-right: auto;margin-left: auto;text-align: center;width:1000px;padding: 10px;border-radius: 6px">
+                <el-container>
+                    <div style="margin-right: auto;margin-left: auto;text-align: center;width:1000px;padding: 10px;border-radius: 6px;align-items: center">
                         <router-view v-slot="{ Component }">
                             <transition name="el-fade-in-linear">
                                 <component :is="Component" />
                             </transition>
                         </router-view>
                     </div>
+                </el-container>
+
             </el-main>
             <el-footer>
             </el-footer>
