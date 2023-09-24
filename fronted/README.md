@@ -27,3 +27,32 @@ npm run dev
 ```sh
 npm run build
 ```
+## 项目依赖
+
+### element-plus
+
+```shell
+npm install element-plus
+```
+### vue-router
+```shell
+npm install vue-router
+```
+### vue-axios
+```shell
+npm install --save axios vue-axios
+```
+### pinia
+```shell
+npm install pinia
+```
+
+### editor.md
+```shell
+npm install editor.md
+```
+
+### icons-vue
+```shell
+npm install @element-plus/icons-vue
+```

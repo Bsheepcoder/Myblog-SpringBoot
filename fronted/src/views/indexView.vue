@@ -3,30 +3,15 @@
         <el-container >
             <el-header class="el-page-header" style="display: block;background-color: #0e0e0e;
             background-image: linear-gradient(130deg,#155899,#15945c);text-align: center;height: 300px">
-                <div style="margin:20px;text-align: right">
-                    <el-switch
-                        v-model="value"
-                        size="large"
-                        active-text="夜晚"
-                        inactive-text="白天"
-                        @onclick=toggleDark()
-                    />
-                </div>
-                <div style="font-family: monospace;margin-top: 80px;font-size: 36px">
+                <div style="font-family: monospace;margin-top: 120px;font-size: 36px">
                     share coding thoughts
                 </div>
-
-
             </el-header>
             <el-main>
                 <el-container>
-                    <div style="margin-right: auto;margin-left: auto;text-align: center;width:1400px;border-radius: 6px;align-items: center;">
+                    <div style="margin-right: auto;margin-left: auto;text-align: center;width:1000px;border-radius: 6px;align-items: center;">
                         <el-row>
-                            <el-col  class="col-block" :xs="0" :sm="0" :md="6" :lg="6" :xl="6"  >
-                               <aboutMeCard></aboutMeCard>
-                                <hot-articles></hot-articles>
-                            </el-col>
-                            <el-col   class="col-block"  :xs="24" :sm="24" :md="18" :lg="18" :xl="18"  >
+                            <el-col   class="col-block"  :xs="24" :sm="24" :md="24" :lg="24" :xl="24"  >
                                 <router-view v-slot="{ Component }">
                                     <transition name="el-fade-in-linear">
                                         <component :is="Component" />
@@ -34,22 +19,20 @@
                                 </router-view>
                             </el-col>
                         </el-row>
-
-
-
                     </div>
                 </el-container>
-                <el-backtop :right="100" :bottom="100" />
-
+                <el-backtop :right="50" :bottom="100" style="background-color: lightsalmon;color: white" />
+                <el-footer style="text-align: center;bottom: 0;">
+                    <div style="height: 100%;width: 100%; ">
+                        <div class="footer-text"> Powered by 腾讯云 </div>
+                        <div class="footer-text">Copyright © 2023 代码思想社 - All rights reserved 蒙ICP备xxxxx号</div>
+                    </div>
+                </el-footer>
             </el-main>
-            <el-footer style="text-align: center">
-                <div style="height: 100%;width: 100%; ">
-                    <div class="footer-text"> Powered by 腾讯云 </div>
-                    <div class="footer-text">Copyright © 2023 代码思想社 - All rights reserved 蒙ICP备xxxxx号</div>
-                </div>
-            </el-footer>
         </el-container>
+
     </div>
+
 </template>
 
 <script lang="ts" setup>

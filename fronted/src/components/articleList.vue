@@ -1,8 +1,8 @@
 <template>
 
 
-    <div>
-        <el-card v-for="o in tableData" :key="o"  :data="tableData" class="box-card"   shadow="hover"  @click="getin(o.aid)" >
+    <div v-loading="loading" >
+        <el-card    v-for="o in tableData" :key="o"  :data="tableData" class="box-card"   shadow="hover"  @click="getin(o.aid)" >
             <div style="height: 100%;width: 100%;">
                 <div class="card-header">
                     <div>{{o.title}}</div>
@@ -22,7 +22,7 @@
 import {onMounted, ref} from "vue";
 import {get} from "@/net";
 import router from "@/router";
-
+const loading = ref(true)
 const getin = (e) =>{
     router.push({
         path: `/page/${e}`,
@@ -34,6 +34,7 @@ const fetchData = () => {
     get('/api/article/list', (msg) => {
         tableData.value = msg; // 使用ref的.value属性来更新数据
     });
+    loading.value = false
 }
 
 onMounted(() => {
@@ -53,7 +54,7 @@ onMounted(() => {
     font-family: Tahoma, sans-serif;
     text-align: left;
     margin-top: 20px;
-    font-size: 18px;
+    font-size: 16px;
 }
 .text {
     font-size: 14px;
@@ -66,7 +67,7 @@ onMounted(() => {
 .box-card {
     margin: 5px;
     margin-bottom: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 10px;
     font-family: 微软雅黑,serif;
     height: 100%;

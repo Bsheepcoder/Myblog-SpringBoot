@@ -1,6 +1,6 @@
 <template>
   <div>
-      <el-card class="box-card">
+      <el-card v-loading="loading" class="box-card">
           <div style="display:flex;justify-content: space-between;align-items: center;height: 40px;margin: 2px" >
               <el-button type="primary" @click="router.back()">返回</el-button>
           </div>
@@ -10,17 +10,20 @@
 
           <el-container  class="page-container">
               <el-row>
-
-                  <el-col  class="col-block" :xs="24" :sm="24" :md="18" :lg="18" :xl="18"  >
-                      <MdPreview :editorId="id" :modelValue="text1" />
+                  <el-col  class="col-block" :xs="24" :sm="24" :md="24" :lg="24" :xl="24"  >
+                      <MdPreview    :editorId="id" :modelValue="text1"/>
                   </el-col>
-                  <el-col   class="col-block"  :xs="0" :sm="0" :md="6" :lg="6" :xl="6"  >
-                      <div class="app" style="background-color: #155899">
-                          <div class="movable-div" :style="{ top: top + 'px' }">
-                              <MdCatalog :editorId="id" :scrollElement="scrollElement" />
-                          </div>
-                      </div>
-                  </el-col>
+<!--              目录    -->
+<!--                  <el-col   class="col-block"  :xs="0" :sm="0" :md="6" :lg="6" :xl="6"  >-->
+<!--                      <div class="app" style="background-color: #155899">-->
+<!--                          <div class="movable-div" :style="{ top: top + 'px' }">-->
+<!--                              <el-card style="margin: 10px;width: 240px">-->
+<!--                                  <el-text style="font-size: larger;;font-weight: 700">目录</el-text>-->
+<!--                                  <MdCatalog style="margin-top: 10px" :editorId="id" :scrollElement="scrollElement" />-->
+<!--                              </el-card>-->
+<!--                          </div>-->
+<!--                      </div>-->
+<!--                  </el-col>-->
 
 
 <!--                  <el-col :span="18" class="content">   <MdPreview :editorId="id" :modelValue="text1" /></el-col>-->
@@ -49,9 +52,10 @@ import {MdEditor} from 'md-editor-v3';
 import 'md-editor-v3/lib/preview.css';
 import { MdPreview, MdCatalog } from 'md-editor-v3';
 import AboutMeCard from "./aboutMeCard.vue";
+const loading = ref(true)
 
 const id = 'preview-only';
-const text1 = ref('# Hello Editor');
+const text1 = ref('');
 const scrollElement = document.documentElement;
 
 const pageinfo  = ref([]);
@@ -73,7 +77,9 @@ onMounted(() => {
         console.log(message)
         pageinfo.value = message
         text1.value = pageinfo.value.text
+
     });
+    loading.value = false
     top.value = window.scrollY;
     window.addEventListener('scroll', handleWindowScroll);
 });
