@@ -33,4 +33,9 @@ public class TagServiceImpl implements TagService {
     public List<ArticleTag> getTagList() {
         return tagMapper.getTagList();
     }
+
+    @Override
+    public String getTagName(int tid) {
+        return tagMapper.getTagName(tid);
+    }
 }

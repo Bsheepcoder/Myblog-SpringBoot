@@ -15,4 +15,6 @@ public interface TagService {
 
     public boolean updateTag(int id,String tagname);
 
+    public String getTagName(int tid);
+
 }

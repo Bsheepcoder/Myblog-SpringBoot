@@ -23,7 +23,7 @@ public class TagController {
         if(tagService.addTag(name)){
             return RestBean.success("添加成功！");
         }
-        return RestBean.failure(500,"接口添加失败！");
+        return RestBean.failure(202,"接口添加失败！");
     }
 
     @GetMapping("/del")
@@ -31,7 +31,7 @@ public class TagController {
         if(tagService.deleteTag(id)){
             return RestBean.success("删除成功！");
         }
-        return RestBean.failure(500,"接口删除失败！");
+        return RestBean.failure(202,"接口删除失败！");
     }
 
     @GetMapping("/up")
@@ -39,7 +39,8 @@ public class TagController {
         if(tagService.updateTag(id,name)){
             return RestBean.success("更新成功！");
         }
-        return RestBean.failure(500,"接口更新失败！");
+        //  202 已接受。已经接受请求，但未处理完成
+        return RestBean.failure(202,"接口更新失败！");
     }
 
     @GetMapping("/list")
@@ -48,7 +49,17 @@ public class TagController {
         if(list.size() != 0){
             return RestBean.success(list);
         }
-        return RestBean.failure(500,null);
+        return RestBean.failure(204,null);
+    }
+
+    @GetMapping("/get")
+    public RestBean<String> getTagName(@RequestParam("tid") int tid){
+        String tname = tagService.getTagName(tid);
+        if(tname != null){
+            return RestBean.success(tname);
+        }
+        //204 无内容。服务器成功处理，但未返回内容。在未更新网页的情况下，可确保浏览器继续显示当前文档
+        return RestBean.failure(204,"没找到对应的标签");
     }
 
 }

@@ -1,13 +1,10 @@
 package com.backend.controller;
 
 import com.backend.entity.Article;
-import com.backend.entity.ArticleView;
 import com.backend.entity.RestBean;
 import com.backend.service.ArticleService;
 import jakarta.annotation.Resource;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;

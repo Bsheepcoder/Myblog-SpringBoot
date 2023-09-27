@@ -1,6 +1,4 @@
 <template>
-
-
     <div v-loading="loading" >
         <el-card    v-for="o in tableData" :key="o"  :data="tableData" class="box-card"   shadow="hover"  @click="getin(o.aid)" >
             <div style="height: 100%;width: 100%;">
@@ -29,13 +27,24 @@ const getin = (e) =>{
         aid: e,
     })
 }
-const tableData = ref([]);
+
+const tableData = ref([])
+let count = 0
+const tagName = ref([''])
 const fetchData = () => {
     get('/api/article/list', (msg) => {
         tableData.value = msg; // 使用ref的.value属性来更新数据
     });
     loading.value = false
 }
+
+const getTagName = (tid) =>{
+    get('/api/tag/get', (msg) => {
+        tagName.value = msg; // 使用ref的.value属性来更新数据
+    });
+}
+
+
 
 onMounted(() => {
     fetchData(); // 在组件挂载后调用获取数据的函数
@@ -56,21 +65,12 @@ onMounted(() => {
     margin-top: 20px;
     font-size: 16px;
 }
-.text {
-    font-size: 14px;
-}
-
-.item {
-    margin-bottom: 18px;
-}
-
 .box-card {
-    margin: 5px;
-    margin-bottom: 20px;
     border-radius: 5px;
     padding: 10px;
     font-family: 微软雅黑,serif;
     height: 100%;
+    margin-bottom: 10px;
 }
 
 

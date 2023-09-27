@@ -1,7 +1,6 @@
 package com.backend.service.Impl;
 
 import com.backend.entity.Article;
-import com.backend.entity.ArticleView;
 import com.backend.mapper.ArticleMapper;
 import com.backend.service.ArticleService;
 import jakarta.annotation.Resource;

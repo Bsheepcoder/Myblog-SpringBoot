@@ -95,7 +95,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .box-card{
-    margin: 5px;
+
 }
 .page-header{
     font-family: 微软雅黑;

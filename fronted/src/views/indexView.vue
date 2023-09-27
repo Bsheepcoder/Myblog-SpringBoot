@@ -9,14 +9,39 @@
             </el-header>
             <el-main>
                 <el-container>
-                    <div style="margin-right: auto;margin-left: auto;text-align: center;width:1000px;border-radius: 6px;align-items: center;">
+                    <div style="margin-right: auto;margin-left: auto;text-align: center;width:1400px;border-radius: 6px;align-items: center;">
                         <el-row>
-                            <el-col   class="col-block"  :xs="24" :sm="24" :md="24" :lg="24" :xl="24"  >
+                            <el-col   class="col-block"  :xs="24" :sm="24" :md="24" :lg="0" :xl="0"  >
+                                <div style="display:flex;justify-content: space-between;margin-bottom: 10px">
+                                    <el-select v-model="ops" filterable placeholder="Select">
+                                        <el-option
+                                            v-for="item in TagData"
+                                            :key="item.tid"
+                                            :label="item.tname"
+                                            :value="item.tid"
+                                        />
+                                    </el-select>
+                                </div>
+                            </el-col>
+                            <el-col   class="col-block"  :xs="0" :sm="0" :md="0" :lg="4" :xl="4"  >
+                                <el-card  class="article-tag" >
+                                    <div>标签列表</div>
+                                    <div v-for="o in TagData">
+                                        <div>
+                                            <el-button class="tag"     color="#626aef" :dark="isDark">{{o.tname}}</el-button>
+                                        </div>
+                                    </div>
+                                </el-card >
+                            </el-col>
+                            <el-col   class="col-block"  :xs="24" :sm="24" :md="24" :lg="16" :xl="16"  >
                                 <router-view v-slot="{ Component }">
                                     <transition name="el-fade-in-linear">
                                         <component :is="Component" />
                                     </transition>
                                 </router-view>
+                            </el-col>
+                            <el-col   class="col-block"  :xs="24" :sm="24" :md="24" :lg="4" :xl="4"  >
+
                             </el-col>
                         </el-row>
                     </div>
@@ -37,24 +62,29 @@
 
 <script lang="ts" setup>
 
-
-import AboutMeCard from "../components/aboutMeCard.vue";
-import {ref} from "vue";
-import {MdCatalog} from "md-editor-v3";
-
-
-
-
+import {onMounted, ref} from "vue";
 const value = ref(true)
-
-
-
 import { useDark, useToggle } from '@vueuse/core'
-import HotArticles from "../components/hotArticles.vue";
+import {get} from "@/net";
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
+
+const ops = ref('')
+const TagData = ref([]);
+const loading = ref(true)
+
+const fetchTagData = () => {
+    get('/api/tag/list', (msg) => {
+        TagData.value = msg; // 使用ref的.value属性来更新数据
+    });
+    loading.value = false
+}
+
+onMounted(() => {
+    fetchTagData(); // 在组件挂载后调用获取数据的函数
+});
 </script>
 
 <style scoped>
@@ -68,15 +98,26 @@ img {
 img:nth-of-type(3) {
     margin-right: 0;
 }
-.box-card{
-    margin: 5px;
-    text-align: center;
-    padding: 10px;
-}
+
 .footer-text{
     color: grey;
     font-size: small;
 }
 
+.article-tag{
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    border-radius: 5px;
+    font-family: 微软雅黑,serif;
+    padding: 10px;
+    width: 170px;
+}
+
+.tag{
+    border-radius:40px;
+    height: 25px;
+    margin-top: 10px;
+}
 </style>
     

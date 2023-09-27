@@ -12,7 +12,7 @@ const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
-axios.defaults.baseURL = 'https://www.husile.top:8081'
+axios.defaults.baseURL = 'http://localhost:8080'
 app.use(ElementPlus)
 app.use(router)
 app.mount('#app')
