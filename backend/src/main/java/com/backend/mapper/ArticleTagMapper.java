@@ -19,6 +19,10 @@ public interface ArticleTagMapper {
     @Delete("delete from article_tag where aid = #{aid} and tid = #{tid}")
     public boolean deleteArticleTag(int aid,int tid);
 
+    // 查询文章的所有标签
     @Select("select t.tname from tag t inner join article_tag a on t.tid = a.tId where a.aId = #{aid}")
     public List<String> getArticleTagList(int aid);
+
+    @Insert("update article_tag set tId = #{ntid} where tId = #{tid} and aId = #{aid}")
+    public boolean updateArticleTag(int aid,int tid,int ntid);
 }
