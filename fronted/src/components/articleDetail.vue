@@ -63,7 +63,6 @@ const route = useRoute();
 const aid = ref('');
 let text = ref("");
 
-
 const top = ref(0);
 
 const handleWindowScroll = () => {

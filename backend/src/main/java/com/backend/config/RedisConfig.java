@@ -14,8 +14,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 /**
  * @program: media
  * @description: RedisConfiguration
- * @author: 庄霸.liziye
- * @create: 2021-12-15 10:16
  **/
 @Configuration
 @ConditionalOnClass(RedisOperations.class)

@@ -3,6 +3,7 @@ package com.backend.controller;
 
 import com.backend.entity.ArticleTag;
 import com.backend.entity.RestBean;
+import com.backend.entity.Tag;
 import com.backend.service.TagService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,8 +45,8 @@ public class TagController {
     }
 
     @GetMapping("/list")
-    public RestBean<List<ArticleTag>> getTagList(){
-        List<ArticleTag>  list  = tagService.getTagList();
+    public RestBean<List<Tag>> getTagList(){
+        List<Tag>  list  = tagService.getTagList();
         if(list.size() != 0){
             return RestBean.success(list);
         }

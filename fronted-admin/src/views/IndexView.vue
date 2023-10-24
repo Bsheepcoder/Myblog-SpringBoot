@@ -6,20 +6,7 @@
                     <span id="title">博客管理</span>
                 </div>
                 <div class="flex flex-wrap items-center">
-                    <el-dropdown>
-                        <el-button type="primary" id="zhanghu">
-                            账户<el-icon class="el-icon--right"
-                        ><arrow-down
-                        /></el-icon>
-                        </el-button>
-                        <template #dropdown>
-                            <el-dropdown-menu>
-                                <el-dropdown-item>个人信息</el-dropdown-item>
-                                <el-dropdown-item>其他</el-dropdown-item>
-                                <el-dropdown-item  @click="logout">退出登录</el-dropdown-item>
-                            </el-dropdown-menu>
-                        </template>
-                    </el-dropdown>
+                    <el-button type="primary" @click="logout">退出登录</el-button>
                 </div>
             </el-header>
             <el-container>

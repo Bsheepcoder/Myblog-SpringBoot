@@ -1,6 +1,7 @@
 package com.backend.service.Impl;
 
 import com.backend.entity.ArticleTag;
+import com.backend.entity.Tag;
 import com.backend.mapper.TagMapper;
 import com.backend.service.TagService;
 import jakarta.annotation.Resource;
@@ -30,7 +31,7 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public List<ArticleTag> getTagList() {
+    public List<Tag> getTagList() {
         return tagMapper.getTagList();
     }
 

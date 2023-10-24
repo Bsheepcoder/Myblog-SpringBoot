@@ -1,6 +1,7 @@
 package com.backend.service;
 
 import com.backend.entity.ArticleTag;
+import com.backend.entity.Tag;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 public interface TagService {
     public boolean addTag(String tag);
 
-    public List<ArticleTag> getTagList();
+    public List<Tag> getTagList();
 
     public boolean deleteTag(int id);
 

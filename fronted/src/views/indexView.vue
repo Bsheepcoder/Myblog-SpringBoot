@@ -48,9 +48,9 @@
                 </el-container>
                 <el-backtop :right="50" :bottom="100" style="background-color: lightsalmon;color: white" />
                 <el-footer style="text-align: center;bottom: 0;">
-                    <div style="height: 100%;width: 100%; ">
+                    <div style="height: 100%;width: 100%">
                         <div class="footer-text"> Powered by 腾讯云 </div>
-                        <div class="footer-text">Copyright © 2023 代码思想社 - All rights reserved 蒙ICP备xxxxx号</div>
+                        <div class="footer-text">Copyright © 2023 代码研习社 - All rights reserved 蒙ICP备2023003393号</div>
                     </div>
                 </el-footer>
             </el-main>

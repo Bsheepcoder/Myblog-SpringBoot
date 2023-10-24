@@ -44,6 +44,11 @@ const router = createRouter({
                     name:'taglist',
                     component:()=>import('@/components/tag/taglist.vue')
                 },
+                {
+                    path:'/updateArticle/:aid',
+                    name:'updateArticle',
+                    component:()=>import('@/components/article/updateArticle.vue')
+                },
             ]
         }
     ]

@@ -3,7 +3,7 @@ package com.backend.entity;
 import lombok.Data;
 
 @Data
-public class article_tag {
-    int uid;
+public class UserArticle {
     int aid;
+    int tid;
 }

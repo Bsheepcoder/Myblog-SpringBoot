@@ -21,6 +21,7 @@ import {onMounted, ref} from "vue";
 import {get} from "@/net";
 import router from "@/router";
 const loading = ref(true)
+
 const getin = (e) =>{
     router.push({
         path: `/page/${e}`,

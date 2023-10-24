@@ -12,7 +12,7 @@
         </el-form-item>
         <el-form-item label="文章标签">
             <el-select v-model="form.tag" placeholder="选择标签">
-                <el-option label="默认" value="2" />
+                <el-option v-for="tag in taglist"  :label="tag.tname" :value="tag.tid" />
             </el-select>
         </el-form-item>
         <el-form-item label="文章概述">
@@ -25,12 +25,12 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import {onMounted, reactive} from 'vue'
 import {defineComponent, ref} from 'vue';
 import {MdEditor} from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 import {ElMessage} from "element-plus";
-import {post} from "@/net";
+import {get, post} from "@/net";
 import router from "@/router";
 
 const form = reactive({
@@ -59,6 +59,17 @@ const onSubmit = () => {
     }
     console.log('submit!')
 }
+
+
+const taglist = ref([])
+const fetchData = () => {
+    get('/api/tag/list', (msg) => {
+        taglist.value = msg; // 使用ref的.value属性来更新数据
+    });
+}
+onMounted(() => {
+    fetchData(); // 在组件挂载后调用获取数据的函数
+});
 </script>
 
 <style scoped>
