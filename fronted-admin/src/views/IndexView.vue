@@ -29,7 +29,6 @@
                                 <el-menu-item index="1-2"
                                               @click="router.push('/createArticle')"
                                 >创建文章</el-menu-item>
-                                <el-menu-item index="1-3">其他</el-menu-item>
                         </el-sub-menu>
                         <el-sub-menu index="2">
                             <template #title>
@@ -37,7 +36,6 @@
                                 <span>标签管理</span>
                             </template>
                             <el-menu-item index="3-1" @click="router.push('/taglist')">标签列表</el-menu-item>
-                            <el-menu-item index="3-2">添加标签</el-menu-item>
                         </el-sub-menu>
                         <el-sub-menu index="3">
                             <template #title>
@@ -48,12 +46,19 @@
                         </el-sub-menu>
                     </el-menu>
                 </el-aside>
+
                 <el-main>
-                    <router-view v-slot="{ Component }">
-                        <transition name="el-fade-in-linear">
-                            <component :is="Component" />
-                        </transition>
-                    </router-view>
+                    <div style="background-color: white;border-radius: 7px;padding: 20px;box-shadow: 1px 1px 10px #babcbe">
+                    <show-view></show-view>
+                    </div>
+                    <div style="background-color: white;border-radius: 7px;padding: 20px;margin-top: 10px;box-shadow: 1px 1px 10px #babcbe">
+                        <router-view v-slot="{ Component }">
+                            <transition name="el-fade-in-linear">
+                                <component :is="Component" />
+                            </transition>
+                        </router-view>
+                    </div>
+
                 </el-main>
             </el-container>
         </el-container>
@@ -138,6 +143,7 @@ import {
 } from "@element-plus/icons-vue";
 import { ref } from "vue";
 import { ArrowDown } from '@element-plus/icons-vue'
+import ShowView from "@/components/show/showView.vue";
 
 const logout = () => {
     get("/api/auth/logout", (message) => {

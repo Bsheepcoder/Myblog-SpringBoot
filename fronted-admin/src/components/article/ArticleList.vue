@@ -27,23 +27,22 @@
 
 <script lang="ts" setup>
 import {get,post} from "@/net";
-import {computed, createApp, onMounted, reactive, ref} from "vue";
+import {computed, createApp, onMounted, reactive, ref,inject} from "vue";
 import {ElMessage} from "element-plus";
 const search = ref('')
 const tableData = ref([]);
 import router from "@/router";
-const fetchData = () => {
-    get('/api/article/list', (msg) => {
-        console.log(msg);
-        console.log(typeof msg);
-        tableData.value = msg; // 使用ref的.value属性来更新数据
-    });
-}
+const reload = inject('reload')
+get('/api/article/list', (msg) => {
+    tableData.value = msg; // 使用ref的.value属性来更新数据
+});
+
 
 const deletePage = (e) =>{
     post('/api/article/delete?aid=' + e, (msg) => {
         console.log(msg)
     });
+    reload()
 }
 
 const updateArticle = (e) =>{
@@ -51,13 +50,8 @@ const updateArticle = (e) =>{
         path: `/updateArticle/${e}`,
         aid: e,
     })
+    reload()
 }
-
-
-onMounted(() => {
-    fetchData(); // 在组件挂载后调用获取数据的函数
-});
-
 
 
 </script>

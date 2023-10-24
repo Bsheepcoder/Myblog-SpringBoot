@@ -6,7 +6,8 @@
           </div>
 
           <h1 class="page-header">{{pageinfo.title}}</h1>
-          <p  class="page-time">最后更新：{{pageinfo.datetime}}</p>
+          <p  class="page-time">更新时间：{{pageinfo.updateTime}} / 创建时间：{{pageinfo.createTime}} / 访问人数：{{pageinfo.visitCount}} </p>
+
 
           <el-container  class="page-container">
               <el-row>
@@ -75,7 +76,7 @@ onMounted(() => {
     get("/api/article/page?aid=" + aid.value, (message) => {
         console.log(message)
         pageinfo.value = message
-        text1.value = pageinfo.value.text
+        text1.value = pageinfo.value.content
 
     });
     loading.value = false

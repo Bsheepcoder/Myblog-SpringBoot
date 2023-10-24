@@ -6,10 +6,7 @@ import com.backend.entity.RestBean;
 import com.backend.entity.Tag;
 import com.backend.service.TagService;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,15 +16,16 @@ public class TagController {
     @Resource
     TagService tagService;
 
-    @GetMapping("/add")
+    @PostMapping("/add")
     public RestBean<String> addTag(@RequestParam("tagName") String name){
+        System.out.println(name);
         if(tagService.addTag(name)){
             return RestBean.success("添加成功！");
         }
         return RestBean.failure(202,"接口添加失败！");
     }
 
-    @GetMapping("/del")
+    @PostMapping("/del")
     public RestBean<String> deleteTag(@RequestParam("tagId") int id){
         if(tagService.deleteTag(id)){
             return RestBean.success("删除成功！");
