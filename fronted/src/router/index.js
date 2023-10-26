@@ -19,11 +19,10 @@ const router = createRouter({
                     aid:0,
                 },
                 {
-                    path:'/tag/:tid',
-                    name:'ArticleTagList',
-                    component:()=>import('@/components/article/articleTagList.vue'),
-                    aid:0,
-                },
+                    path:'/new',
+                    name:'new',
+                    component:()=>import('@/components/new/newItem.vue'),
+                }
             ]
         }
     ]

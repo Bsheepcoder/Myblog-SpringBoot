@@ -1,6 +1,20 @@
 <template>
     <div class="common-layout">
         <el-container >
+            <el-affix :offset="0">
+                <el-menu
+                    :default-active="activeIndex"
+                    class="el-menu-demo"
+                    mode="horizontal"
+                    @select="handleSelect"
+                >
+                    <el-menu-item class="menu-item" @click="router.push('/')">
+                        <div style="">Q's blog</div>
+                    </el-menu-item>
+                    <el-menu-item  class="menu-item"  @click="router.push('/new')">实验室</el-menu-item>
+                </el-menu>
+            </el-affix>
+
             <el-header class="el-page-header" style="display: block;background-color: #0e0e0e;
             background-image: linear-gradient(130deg,#155899,#15945c);text-align: center;height: 300px">
                 <div style="font-family: monospace;margin-top: 120px;font-size: 36px">
@@ -15,6 +29,7 @@
 
                             </el-col>
                             <el-col   class="col-block"  :xs="0" :sm="0" :md="0" :lg="4" :xl="4"  >
+
                             </el-col>
                             <el-col   class="col-block"  :xs="24" :sm="24" :md="24" :lg="16" :xl="16"  >
                                 <router-view v-slot="{ Component }">
@@ -54,7 +69,10 @@ const isDark = useDark()
 const toggleDark = useToggle(isDark)
 const ops = ref('')
 const loading = ref(true)
-
+const activeIndex = ref('1')
+const handleSelect = (key: string, keyPath: string[]) => {
+    console.log(key, keyPath)
+}
 
 
 </script>
@@ -79,8 +97,12 @@ img:nth-of-type(3) {
     color: black;
     font-size: small;
 }
-
-
+.menu-item{
+    font-weight: bolder;
+}
+.el-menu-demo{
+    justify-content: space-between;
+}
 
 </style>
     

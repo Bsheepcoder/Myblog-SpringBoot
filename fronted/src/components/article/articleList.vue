@@ -13,7 +13,7 @@
     <div class="article-tag">
         <el-button class="tag"     color="#626aef" :dark="isDark"  @click="fetchData">全部</el-button>
         <div v-for="o in TagData">
-            <el-button class="tag"  :style="{ backgroundColor: getRandomColor()}" :dark="isDark"  @click="getTagList(o.tid)">{{o.tname}}</el-button>
+            <el-button class="tag"  style="background-color: #444654" :dark="isDark"  @click="getTagList(o.tid)">{{o.tname}}</el-button>
         </div>
     </div>
     <div v-loading="loading" >
@@ -64,6 +64,7 @@ const fetchTagData = () => {
     loading.value = false
 }
 
+//根据标签选项获取文章列表
 const getTagList= (tid) => {
     post('/api/article/tag-list',{
         tid:tid
@@ -74,13 +75,8 @@ const getTagList= (tid) => {
     loading.value = false
 }
 
-
 const isDark = ref(true); // 根据需要设置是否为暗色模式
 
-
-const getRandomColor = () => {
-    return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
-};
 
 onMounted(() => {
     fetchData(); // 在组件挂载后调用获取数据的函数
