@@ -25,6 +25,10 @@ public class ArticleServiceImpl  implements ArticleService {
         return articleMapper.getArticleList();
     }
 
+    @Override
+    public List<ArticleView> getArticleList(int tid) {
+        return articleMapper.getArticleListByTid(tid);
+    }
 
     //这里应使用事务进行改写
     @Override

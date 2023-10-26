@@ -52,7 +52,7 @@ import router from "@/router";
 import {MdEditor} from 'md-editor-v3';
 import 'md-editor-v3/lib/preview.css';
 import { MdPreview, MdCatalog } from 'md-editor-v3';
-import AboutMeCard from "./aboutMeCard.vue";
+import AboutMeCard from "../aboutMeCard.vue";
 const loading = ref(true)
 
 const id = 'preview-only';

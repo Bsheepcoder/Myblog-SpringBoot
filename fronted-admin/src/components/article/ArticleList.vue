@@ -33,6 +33,8 @@ const search = ref('')
 const tableData = ref([]);
 import router from "@/router";
 const reload = inject('reload')
+
+
 get('/api/article/list', (msg) => {
     tableData.value = msg; // 使用ref的.value属性来更新数据
 });

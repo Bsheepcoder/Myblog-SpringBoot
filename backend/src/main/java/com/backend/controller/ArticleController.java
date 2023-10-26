@@ -41,6 +41,12 @@ public class ArticleController {
         return RestBean.success(articleService.getArticleList());
     }
 
+    @PostMapping("/tag-list")
+    public RestBean<List<ArticleView>> getArticleTagList(@RequestParam(value = "tid") int tid){
+            return RestBean.success(articleService.getArticleList(tid));
+    }
+
+
     @GetMapping("/page")
     public RestBean<Article> getArticle(@RequestParam("aid") int aid){
         Article article = articleService.getArticle(aid);

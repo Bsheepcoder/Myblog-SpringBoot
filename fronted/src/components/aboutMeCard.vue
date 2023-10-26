@@ -1,6 +1,6 @@
 <template>
     <el-card  class="box-card">
-
+123
     </el-card>
 </template>
 

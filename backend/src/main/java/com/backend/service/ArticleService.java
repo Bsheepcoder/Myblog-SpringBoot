@@ -14,6 +14,8 @@ public interface ArticleService {
 
     List<ArticleView> getArticleList();
 
+    List<ArticleView> getArticleList(int tid);
+
     @Transactional
     public boolean addArticle(String title,Date datetime, String overview, String text,int tid);
 

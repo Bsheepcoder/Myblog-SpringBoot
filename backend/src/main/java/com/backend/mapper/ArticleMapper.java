@@ -14,6 +14,9 @@ public interface ArticleMapper {
     @Select( "select * from article_view")
     public List<ArticleView> getArticleList();
 
+    @Select("select * from article_view where aId in (select article_tag.aId from article_tag where tId = #{tid}) order by createDate DESC")
+    public List<ArticleView> getArticleListByTid(int tid);
+
     @Insert("insert into article(aId,aTitle,createDate,updateDate,overView,content,visitCount) " +
             "values (#{aid},#{title},#{createTime},#{updateTime},#{overview},#{content},#{visitCount})")
     public boolean addArticle(int aid,String title,Date createTime, Date updateTime, String overview, String content,int visitCount);

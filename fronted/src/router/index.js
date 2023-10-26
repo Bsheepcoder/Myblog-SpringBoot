@@ -11,11 +11,17 @@ const router = createRouter({
                 {
                     path:'/',
                     name:'ArticleList',
-                    component:()=>import('@/components/ArticleList.vue')
+                    component:()=>import('@/components/article/articleList.vue')
                 },  {
                     path:'/page/:aid',
                     name:'ArticleDetail',
-                    component:()=>import('@/components/ArticleDetail.vue'),
+                    component:()=>import('@/components/article/articleDetail.vue'),
+                    aid:0,
+                },
+                {
+                    path:'/tag/:tid',
+                    name:'ArticleTagList',
+                    component:()=>import('@/components/article/articleTagList.vue'),
                     aid:0,
                 },
             ]
