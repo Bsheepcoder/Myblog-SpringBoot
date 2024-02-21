@@ -1,7 +1,6 @@
 package com.backend.mapper;
 
-import com.backend.entity.AccountEntity;
-import com.backend.entity.TagEntity;
+import com.backend.entity.ArticleDetailEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -10,5 +9,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @description:
  */
 
-public interface TagMapper extends BaseMapper<TagEntity> {
+public interface ArticleDetailMapper extends BaseMapper<ArticleDetailEntity> {
 }

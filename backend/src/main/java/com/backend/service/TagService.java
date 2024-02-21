@@ -1,21 +1,14 @@
 package com.backend.service;
 
-import com.backend.entity.ArticleTag;
-import com.backend.entity.Tag;
+import com.backend.entity.Base.BaseTagEntity;
+import com.backend.entity.TagEntity;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public interface TagService {
-    public boolean addTag(String tag);
-
-    public List<Tag> getTagList();
-
-    public boolean deleteTag(int id);
-
-    public boolean updateTag(int id,String tagname);
-
-    public String getTagName(int tid);
+public interface TagService extends IService<TagEntity> {
 
 }

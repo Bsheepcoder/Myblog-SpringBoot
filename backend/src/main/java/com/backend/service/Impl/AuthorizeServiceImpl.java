@@ -1,12 +1,12 @@
 package com.backend.service.Impl;
 
-import com.backend.entity.Account;
-import com.backend.mapper.UserMapper;
+import com.backend.entity.AccountEntity;
+import com.backend.mapper.AccountMapper;
 import com.backend.service.AuthorizeService;
 import jakarta.annotation.Resource;
-import jakarta.validation.constraints.Email;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.connection.StringRedisConnection;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
@@ -16,12 +16,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 @Service
+@RequiredArgsConstructor
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class AuthorizeServiceImpl implements AuthorizeService {
 
     @Value("${spring.mail.username}")
@@ -30,7 +35,7 @@ public class AuthorizeServiceImpl implements AuthorizeService {
 
     //引入mapper
     @Resource
-    UserMapper mapper;
+    AccountMapper accountMapper;
 
     //引入redis
     @Resource
@@ -47,11 +52,11 @@ public class AuthorizeServiceImpl implements AuthorizeService {
         if(username == null){
             throw new UsernameNotFoundException("user name can't be null");
         }
-        Account account = mapper.findAccountByNameOrEmail(username);
-        if(account == null){
+        AccountEntity accountEntity = accountMapper.findAccountByNameOrEmail(username,null);
+        if(accountEntity == null){
             throw new UsernameNotFoundException("username or password is fault");
         }
-        return User.withUsername(account.getUsername()).password(account.getPassword()).roles("USERS").build();
+        return User.withUsername(accountEntity.getUsername()).password(accountEntity.getPassword()).roles("USERS").build();
     }
 
 
@@ -70,11 +75,11 @@ public class AuthorizeServiceImpl implements AuthorizeService {
             Long expire = Optional.ofNullable(template.getExpire(key,TimeUnit.SECONDS)).orElse(0L);
             if(expire > 120) return "请求频繁，请稍后再试";
         }
-        Account account = mapper.findAccountByNameOrEmail(email);
+        AccountEntity accountEntity = accountMapper.findAccountByNameOrEmail(null,email);
 
-        if(hasAccount  && account == null)
+        if(hasAccount  && accountEntity == null)
             return "此邮箱没有注册";
-        if(!hasAccount && account != null){
+        if(!hasAccount && accountEntity != null){
             return "此邮箱已被其他用户注册";
         }
 
@@ -100,16 +105,18 @@ public class AuthorizeServiceImpl implements AuthorizeService {
     @Override
     public String validateAndRegister(String username,String password,String email,String code,String sessionId){
         String key = "email:" + sessionId + ":" + email + ":false";
+
         if(Boolean.TRUE.equals(template.hasKey(key))){
             String s = template.opsForValue().get(key);
+
             if(s == null) return "验证码失效，请重新请求";
             if(s.equals(code)){
                 //清除redis的code
                 template.delete(key);
-                Account account = mapper.findAccountByNameOrEmail(username);
+                AccountEntity accountEntity = accountMapper.findAccountByNameOrEmail(username,null);
                 password = encoder.encode(password); //加密
-                if(account != null) return "此用户名已被注册，请更换用户名";
-                if(mapper.createAccount(username,password,email) > 0){
+                if(accountEntity != null) return "此用户名已被注册，请更换用户名";
+                if(accountMapper.createAccount(username,password,email)){
                     return null;
                 }else{
                     return "内部错误，请联系管理员";
@@ -142,6 +149,6 @@ public class AuthorizeServiceImpl implements AuthorizeService {
     @Override
     public boolean resetPassword(String password, String email){
         password = encoder.encode(password);
-        return mapper.resetPasswordByEmail(password,email) > 0;
+        return accountMapper.resetPasswordByEmail(password,email);
     }
 }

@@ -15,6 +15,16 @@
     <description>backend</description>
     <properties>
         <java.version>17</java.version>
+        <mybatis.version>3.0.1</mybatis.version>
+        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
+        <lombok.version>1.18.28</lombok.version>
+        <junit.version>4.12</junit.version>
+        <snakeyaml.version>2.0</snakeyaml.version>
+        <hutool-captcha.version>5.3.10</hutool-captcha.version>
+        <fastjson.version>1.2.67_noneautotype2</fastjson.version>
+        <knife4j.version>4.3.0</knife4j.version>
+        <springfox-swagger2.version>2.10.5</springfox-swagger2.version>
+        <springfox-swagger-ui.version>2.10.5</springfox-swagger-ui.version>
     </properties>
     <dependencies>
         <!-- spring   -->
@@ -30,7 +40,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>3.1.3</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -44,13 +53,17 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>3.0.1</version>
+            <version>${mybatis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jdbc</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
@@ -71,57 +84,51 @@
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!-- MongoDB      -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>
-        </dependency>
         <!--  辅助开发      -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.28</version>
+            <version>${lombok.version}</version>
         </dependency>
         <!--    接口文档    -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
-            <version>4.3.0</version>
+            <version>${knife4j.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.10.5</version> <!-- 根据需要选择版本 -->
+            <version>${springfox-swagger2.version}</version> <!-- 根据需要选择版本 -->
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.10.5</version> <!-- 根据需要选择版本 -->
+            <version>${springfox-swagger-ui.version}</version> <!-- 根据需要选择版本 -->
         </dependency>
         <!--    单元测试    -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
-            <version>2.0</version>
+            <version>${snakeyaml.version}</version>
         </dependency>
         <!--  json      -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.67_noneautotype2</version>
+            <version>${fastjson.version}</version>
         </dependency>
         <!--   验证码     -->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-captcha</artifactId>
-            <version>5.3.10</version>
+            <version>${hutool-captcha.version}</version>
         </dependency>
     </dependencies>
 

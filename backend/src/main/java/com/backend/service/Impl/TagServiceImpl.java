@@ -1,42 +1,20 @@
 package com.backend.service.Impl;
 
-import com.backend.entity.ArticleTag;
-import com.backend.entity.Tag;
+import com.backend.entity.TagEntity;
 import com.backend.mapper.TagMapper;
 import com.backend.service.TagService;
-import jakarta.annotation.Resource;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Slf4j
 @Service
-public class TagServiceImpl implements TagService {
-
-    @Resource
-    TagMapper tagMapper;
-
-    @Override
-    public boolean addTag(String tag) {
-        return tagMapper.addTag(tag);
-    }
-
-    @Override
-    public boolean deleteTag(int id) {
-        return tagMapper.deleteTag(id);
-    }
-
-    @Override
-    public boolean updateTag(int id,String tagname) {
-        return tagMapper.updateTag(id,tagname);
-    }
-
-    @Override
-    public List<Tag> getTagList() {
-        return tagMapper.getTagList();
-    }
-
-    @Override
-    public String getTagName(int tid) {
-        return tagMapper.getTagName(tid);
-    }
+@RequiredArgsConstructor
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+public class TagServiceImpl extends ServiceImpl<TagMapper,TagEntity> implements TagService {
 }

@@ -73,7 +73,7 @@ const handleWindowScroll = () => {
 onMounted(() => {
     aid.value = <string>route.params.aid;
     console.log('Aid:', aid.value);
-    get("/api/article/page?aid=" + aid.value, (message) => {
+    get("/api/baseArticleEntity/page?aid=" + aid.value, (message) => {
         console.log(message)
         pageinfo.value = message
         text1.value = pageinfo.value.content

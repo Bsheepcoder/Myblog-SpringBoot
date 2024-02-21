@@ -51,7 +51,7 @@ const onSubmit = () => {
     if(!form.title || !text){
         ElMessage.warning('请完善文章内容再提交！')
     }else{
-        post('/api/article/update',{
+        post('/api/baseArticleEntity/update',{
             aid:aid.value,
             title:form.title,
             tag:form.tag,
@@ -78,7 +78,7 @@ onMounted(() => {
     fetchData(); // 在组件挂载后调用获取数据的函数
     aid.value = <string>route.params.aid;
     console.log('Aid:', aid.value);
-    get("/api/article/page?aid=" + aid.value, (message) => {
+    get("/api/baseArticleEntity/page?aid=" + aid.value, (message) => {
         console.log(message)
         pageinfo.value = message
         form.title = pageinfo.value.title

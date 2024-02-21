@@ -1,8 +1,8 @@
 package com.backend.controller;
 
-import com.backend.entity.Article;
+import com.backend.entity.Base.BaseArticleEntity;
 import com.backend.entity.ArticleView;
-import com.backend.entity.RestBean;
+import com.backend.common.RestBean;
 import com.backend.service.ArticleService;
 import com.backend.service.ArticleTagService;
 import jakarta.annotation.Resource;
@@ -19,9 +19,6 @@ public class ArticleController {
 
     @Resource
     ArticleService articleService;
-
-    @Resource
-    ArticleTagService articleTagService;
 
     @PostMapping ("/add")
     public RestBean<String> addArticle(@RequestParam("title") String title,
@@ -48,10 +45,10 @@ public class ArticleController {
 
 
     @GetMapping("/page")
-    public RestBean<Article> getArticle(@RequestParam("aid") int aid){
-        Article article = articleService.getArticle(aid);
-        if(article != null){
-            return RestBean.success(article);
+    public RestBean<BaseArticleEntity> getArticle(@RequestParam("aid") int aid){
+        BaseArticleEntity baseArticleEntity = articleService.getArticle(aid);
+        if(baseArticleEntity != null){
+            return RestBean.success(baseArticleEntity);
         }
         return RestBean.failure(500,null);
     }

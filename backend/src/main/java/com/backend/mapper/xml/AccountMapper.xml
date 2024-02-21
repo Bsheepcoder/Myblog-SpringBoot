@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.mapper.AccountMapper">
+
+    <select id="findAccountByNameOrEmail" resultType="com.backend.entity.AccountEntity">
+        select * from account
+        <where>
+            <if test="username != null">
+                username = #{username}
+            </if>
+            <if test="mail != null">
+                mail = #{mail}
+            </if>
+        </where>
+    </select>
+    
+    <update id="resetPasswordByEmail">
+        update account set password = #{password}
+        where mail = #{mail}
+    </update>
+    
+    <insert id="createAccount">
+        insert account(username,password,mail) value (#{username},#{password},#{mail})
+    </insert>
+    
+</mapper>

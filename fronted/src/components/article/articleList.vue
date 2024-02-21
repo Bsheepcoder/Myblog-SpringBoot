@@ -10,7 +10,7 @@
 <!--            />-->
 <!--        </el-select>-->
 <!--    </div>-->
-    <div class="article-tag">
+    <div class="baseArticleEntity-tag">
         <el-button class="tag"     color="#626aef" :dark="isDark"  @click="fetchData">全部</el-button>
         <div v-for="o in TagData">
             <el-button class="tag"  style="background-color: #444654" :dark="isDark"  @click="getTagList(o.tid)">{{o.tname}}</el-button>
@@ -50,7 +50,7 @@ const tagName = ref([''])
 
 //获取文章列表
 const fetchData = () => {
-    get('/api/article/list', (msg) => {
+    get('/api/baseArticleEntity/list', (msg) => {
         tableData.value = msg; // 使用ref的.value属性来更新数据
     });
     loading.value = false
@@ -66,7 +66,7 @@ const fetchTagData = () => {
 
 //根据标签选项获取文章列表
 const getTagList= (tid) => {
-    post('/api/article/tag-list',{
+    post('/api/baseArticleEntity/tag-list',{
         tid:tid
     } ,(msg) => {
         console.log(msg)
@@ -105,7 +105,7 @@ onMounted(() => {
     height: 100%;
     margin-bottom: 10px;
 }
-.article-tag{
+.baseArticleEntity-tag{
     width: 100%;
     display:inline-block;
     border-radius: 5px;
