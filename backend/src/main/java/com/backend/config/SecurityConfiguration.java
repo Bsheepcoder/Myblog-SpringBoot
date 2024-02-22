@@ -1,9 +1,9 @@
 package com.backend.config;
 
 import com.alibaba.fastjson.JSONObject;
+import com.backend.common.core.response.BlogResponse;
 import com.backend.filter.ValidateCodeFilter;
 import com.backend.service.AuthorizeService;
-import com.backend.common.RestBean;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -117,13 +117,13 @@ public class SecurityConfiguration {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         response.setCharacterEncoding("utf-8");
         if(request.getRequestURI().endsWith("/login"))
-            response.getWriter().write(JSONObject.toJSONString(RestBean.success("登录成功")));
+            response.getWriter().write(JSONObject.toJSONString(BlogResponse.success("登录成功")));
         else if(request.getRequestURI().endsWith("/logout"))
-            response.getWriter().write(JSONObject.toJSONString(RestBean.success("成功退出登录")));
+            response.getWriter().write(JSONObject.toJSONString(BlogResponse.success("成功退出登录")));
     }
 
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException{
         response.setCharacterEncoding("utf-8");
-        response.getWriter().write(JSONObject.toJSONString(RestBean.failure(401,exception.getMessage())));
+        response.getWriter().write(JSONObject.toJSONString(BlogResponse.error(401,exception.getMessage())));
     }
 }

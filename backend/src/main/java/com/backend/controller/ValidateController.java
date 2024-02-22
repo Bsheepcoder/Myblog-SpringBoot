@@ -2,6 +2,8 @@ package com.backend.controller;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -12,10 +14,12 @@ import java.io.IOException;
 import java.io.OutputStream;
 @Slf4j
 @RestController
+@Api(value = "验证接口",tags = {"验证接口"})
 public class ValidateController {
     public final static String SESSION_KEY_IMAGE_CODE = "SESSION_KEY_IMAGE_CODE";
 
     @GetMapping("/code/image")
+    @ApiOperation(value = "生成验证码",notes = "生成验证码")
     public void createCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //设置response响应
         response.setCharacterEncoding("UTF-8");

@@ -1,4 +1,4 @@
-package com.backend.common.entity;
+package com.backend.common.core.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;

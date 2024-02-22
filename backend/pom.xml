@@ -25,6 +25,8 @@
         <knife4j.version>4.3.0</knife4j.version>
         <springfox-swagger2.version>2.10.5</springfox-swagger2.version>
         <springfox-swagger-ui.version>2.10.5</springfox-swagger-ui.version>
+        <p6spy.version>3.9.1</p6spy.version>
+        <dynamic.version>3.4.1</dynamic.version>
     </properties>
     <dependencies>
         <!-- spring   -->
@@ -50,16 +52,25 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- 多数据源插件   -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+            <version>${dynamic.version}</version>
+        </dependency>
+        <!-- mybatis   -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>${mybatis.version}</version>
         </dependency>
+        <!-- mybatis-plus -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus.version}</version>
         </dependency>
+        <!-- jdbc -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jdbc</artifactId>
@@ -130,6 +141,12 @@
             <artifactId>hutool-captcha</artifactId>
             <version>${hutool-captcha.version}</version>
         </dependency>
+        <!-- sql打印插件   -->
+        <dependency>
+            <groupId>p6spy</groupId>
+            <artifactId>p6spy</artifactId>
+            <version>${p6spy.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -148,6 +165,27 @@
             </configuration>
             </plugin>
         </plugins>
+        <!-- 如果不添加此节点mybatis的mapper.xml文件都会被漏掉。 -->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>

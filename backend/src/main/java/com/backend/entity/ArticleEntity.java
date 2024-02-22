@@ -1,7 +1,5 @@
 package com.backend.entity;
 
-import com.backend.common.entity.BaseEntity;
-import com.backend.entity.Base.BaseAccountEntity;
 import com.backend.entity.Base.BaseArticleEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 
