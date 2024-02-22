@@ -5,8 +5,8 @@ import com.backend.common.core.response.BlogResponse;
 import com.backend.entity.ArticleEntity;
 import com.backend.param.article.SaveParam;
 import com.backend.service.ArticleService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -20,14 +20,14 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/article/")
 @AllArgsConstructor
-@Api(value = "文章接口",tags = {"文章接口"})
+@Tag(name = "文章接口")
 public class ArticleController {
 
     @Resource
     ArticleService articleService;
 
     @PostMapping ("/save")
-    @ApiOperation(value = "批量新增或更新",notes = "新增文章")
+    @Operation(summary = "批量新增或修改文章",description = "批量新增或修改文章")
     public BlogResponse addArticle(@Valid List<SaveParam> params){
         try{
             articleService.saveOrUpdateBatch(params.stream().map(e -> e.convert(new ArticleEntity())).collect(Collectors.toList()));
@@ -39,7 +39,7 @@ public class ArticleController {
     }
 
     @GetMapping("/list")
-    @ApiOperation(value = "查询",notes = "查询文章列表")
+    @Operation(summary = "查询",description = "查询文章列表")
     public BlogResponse getArticleList(){
         try{
             return BlogResponse.success(articleService.list());
@@ -51,7 +51,7 @@ public class ArticleController {
 
 
     @GetMapping("/page")
-    @ApiOperation(value = "查询文章内容",notes = "查询文章内容")
+    @Operation(summary = "查询文章内容",description = "查询文章内容")
     public BlogResponse getArticle(@RequestParam("aid") int aid){
         try{
             return BlogResponse.success(articleService.getById(aid));
@@ -62,7 +62,7 @@ public class ArticleController {
     }
 
     @PostMapping("/delete")
-    @ApiOperation(value = "删除",notes = "删除文章")
+    @Operation(summary = "删除",description = "删除文章")
     public BlogResponse deleteArticle(@RequestParam("aids") String aids){
         try{
             articleService.removeBatchByIds(Arrays.asList(aids.split(StringConstant.COMMA)));

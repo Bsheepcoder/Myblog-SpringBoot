@@ -1,8 +1,8 @@
 package com.backend.controller;
 import com.backend.common.core.response.BlogResponse;
 import com.backend.service.AuthorizeService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.Pattern;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/api/auth")
-@Api(value = "登录认证",tags = {"登录认证"})
+@Tag(name = "登录认证")
 public class AuthorizeController {
 
     //正则表达式
@@ -33,7 +33,7 @@ public class AuthorizeController {
 
     //邮箱验证
     @PostMapping("/valid-register-email")
-    @ApiOperation(value = "邮箱验证",notes = "验证登录的邮箱")
+    @Operation(summary = "邮箱验证",description = "验证登录的邮箱")
     public BlogResponse validateRegisterEmail(@Pattern (regexp = EMAIL_REGEX )@RequestParam("email") String email, HttpSession session){
 
         System.out.println("这里");
@@ -46,7 +46,7 @@ public class AuthorizeController {
     }
 
     @PostMapping("/valid-reset-email")
-    @ApiOperation(value = "获取验证码",notes = "通过邮箱获取验证码")
+    @Operation(summary = "获取验证码",description = "通过邮箱获取验证码")
     public BlogResponse validateResetEmail(@Pattern (regexp = EMAIL_REGEX )@RequestParam("email") String email, HttpSession session){
         String s =  service.sendValidateEmail(email,session.getId(),true);
         if(s == null)
@@ -58,7 +58,7 @@ public class AuthorizeController {
 
     //用户注册
     @PostMapping("/register")
-    @ApiOperation(value = "用户注册",notes = "注册新账户")
+    @Operation(summary = "用户注册",description = "注册新账户")
     public BlogResponse registerUser(@Pattern(regexp = USERNAME_REGEX)@RequestParam("username") String username,
                                      @Length(min = 6,max = 16) @RequestParam("password") String password,
                                      @RequestParam("email") String email,
@@ -73,7 +73,7 @@ public class AuthorizeController {
     }
 
     @PostMapping("/start-rest")
-    @ApiOperation(value = "用户注册",notes = "注册新账户")
+    @Operation(summary = "用户注册",description = "注册新账户")
     public BlogResponse startRest(@RequestParam("email") String email,
                                   @Length(min = 6,max = 6) @RequestParam("code") String code,
                                   HttpSession session){
@@ -87,7 +87,7 @@ public class AuthorizeController {
     }
 
     @PostMapping("/do-rest")
-    @ApiOperation(value = "重置密码",notes = "重置账户密码")
+    @Operation(summary = "重置密码",description = "重置账户密码")
     public BlogResponse restPassword(@Length(min = 6,max = 16) @RequestParam("password") String password, HttpSession session){
         String email = (String)session.getAttribute("rest-password");
         if(email == null){
