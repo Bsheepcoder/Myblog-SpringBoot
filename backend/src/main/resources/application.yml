@@ -1,0 +1,61 @@
+server:
+  port: 8081
+# ssl:
+# key-store: classpath:husile.top.jks
+# key-store-password: ${key.password}
+# key-store-type: JKS
+spring:
+  aop:
+    proxy-target-class: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    username: ${mysql.username}
+    password: ${mysql.password}
+    url: jdbc:p6spy:mysql://${mysql.url}:3306/blog?characterEncoding=utf8&useSSL=false
+    dynamic:
+      p6spy: true
+      druid:
+        test-while-idle: false
+  mail:
+    host: smtp.163.com
+    username: ${mail.username}
+    password: ${mail.password}
+    properties:
+      from: qxd
+  data:
+    redis:
+      database: 0
+      host: ${redis.host}
+      port: 6379
+      jedis:
+        pool:
+          max-active: 200
+          max-idle: 500
+          min-idle: 8
+          max-wait: 10000
+      password:
+mybatis-plus:
+  mapper-locations: classpath*:com/backend/**/xml/*Mapper.xml
+  configuration:
+    jdbc-type-for-null: null
+  global-config:
+    banner: false
+springdoc:
+    swagger-ui:
+      path: /swagger-ui.html
+      tags-sorter: alpha
+      operations-sorter: alpha
+    api-docs:
+      path: /v3/api-docs
+      version: openapi_3_1
+    group-configs:
+      - group: '个人博客系统'
+        paths-to-match: '/**'
+        packages-to-scan: com.backend
+backend:
+  path:
+    logs: .//logs
