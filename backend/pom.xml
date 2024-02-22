@@ -27,6 +27,7 @@
         <springfox-swagger-ui.version>2.10.5</springfox-swagger-ui.version>
         <p6spy.version>3.9.1</p6spy.version>
         <dynamic.version>3.4.1</dynamic.version>
+        <log4j.version>1.2.17</log4j.version>
     </properties>
     <dependencies>
         <!-- spring   -->
@@ -152,6 +153,11 @@
             <groupId>p6spy</groupId>
             <artifactId>p6spy</artifactId>
             <version>${p6spy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
         </dependency>
     </dependencies>
 

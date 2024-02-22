@@ -1,4 +1,4 @@
-package com.backend.config.comm.utils.mybatis;
+package com.backend.common.core.utils.mybatis;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

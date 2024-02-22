@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.math.BigDecimal;
+
 /**
  * @author: qxd
  * @date: 2024/2/22
@@ -19,7 +21,7 @@ import lombok.EqualsAndHashCode;
 public class SaveParam extends Param {
 
     @ApiModelProperty(value = "用户ID")
-    Integer aid;
+    BigDecimal aid;
 
     @ApiModelProperty(value = "标题")
     String title;

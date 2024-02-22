@@ -7,13 +7,16 @@ package com.backend.config.comm.p6spy;
  */
 
 import com.backend.entity.AccountEntity;
-import com.backend.config.comm.utils.CUtil;
+import com.backend.common.core.utils.CUtil;
 import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * 自定义日志
@@ -31,9 +34,12 @@ public class P6SpyLogger implements MessageFormattingStrategy {
         if(StringUtils.isBlank(sql)){
             return "";
         }
-        StringBuffer message=new StringBuffer();
+        StringBuffer message = new StringBuffer();
         //1.搜集用户信息
         AccountEntity currentUserInfo = CUtil.getCurrentUserInfo();
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        message.append(" | 时间 " + formatter.format(date));
         if(currentUserInfo!=null&&StringUtils.isNotBlank(currentUserInfo.getUsername())&&StringUtils.isNotBlank(currentUserInfo.getUsername())){
             message.append(" | 用户 " +currentUserInfo.getUsername()+" "+ currentUserInfo.getUsername());
         }
