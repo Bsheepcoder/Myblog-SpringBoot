@@ -1,4 +1,4 @@
-package com.backend.util;
+package com.backend.config.comm.utils;
 import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;

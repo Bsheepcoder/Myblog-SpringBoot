@@ -6,9 +6,14 @@ package com.backend.config.comm.p6spy;
  * @description:
  */
 
+import com.backend.entity.AccountEntity;
+import com.backend.config.comm.utils.CUtil;
 import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
-
-import java.time.LocalDateTime;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  * 自定义日志
@@ -16,21 +21,31 @@ import java.time.LocalDateTime;
  * @author kangqing
  * @date 2020/9/7 10:58
  */
+@Slf4j
 public class P6SpyLogger implements MessageFormattingStrategy {
 
-    /**
-     * 日志格式
-     * @param connectionId 连接id
-     * @param now 当前时间
-     * @param elapsed 耗时多久
-     * @param category 类别
-     * @param prepared mybatis带占位符的sql
-     * @param sql 占位符换成参数的sql
-     * @param url sql连接的 url
-     * @return 自定义格式日志
-     */
-    @Override
-    public String formatMessage(int connectionId, String now, long elapsed, String category, String prepared, String sql, String url) {
-        return !"".equals(sql.trim()) ? "P6SpyLogger " + LocalDateTime.now() + " | elapsed " + elapsed + "ms | category " + category + " | connection " + connectionId + " | url " + url + " | sql \n" + sql : "";
+    public P6SpyLogger() {
     }
+
+    public String formatMessage(int connectionId, String now, long elapsed, String category, String prepared, String sql, String url) {
+        if(StringUtils.isBlank(sql)){
+            return "";
+        }
+        StringBuffer message=new StringBuffer();
+        //1.搜集用户信息
+        AccountEntity currentUserInfo = CUtil.getCurrentUserInfo();
+        if(currentUserInfo!=null&&StringUtils.isNotBlank(currentUserInfo.getUsername())&&StringUtils.isNotBlank(currentUserInfo.getUsername())){
+            message.append(" | 用户 " +currentUserInfo.getUsername()+" "+ currentUserInfo.getUsername());
+        }
+        //2.搜集请求地址
+        ServletRequestAttributes servletRequestAttributes =  (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if(servletRequestAttributes!=null){
+            HttpServletRequest request = servletRequestAttributes.getRequest();
+            message.append(" | IP地址 ").append(CUtil.getIp(request)).append(" | 方法地址 ").append(request.getRequestURI());
+        }
+        message.append(" | 耗时 ").append(elapsed).append(" ms | SQL 语句：").append("\n").append(sql.replaceAll("\\s+", " ")).append(";");
+        return message.toString();
+    }
+
+
 }
