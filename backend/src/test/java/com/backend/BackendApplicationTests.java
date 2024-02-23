@@ -1,6 +1,6 @@
 package com.backend;
 
-import com.backend.mapper.UserMapper;
+import com.backend.mapper.AccountMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,11 +12,11 @@ import java.util.List;
 @SpringBootTest
 class BackendApplicationTests {
     @Autowired
-    UserMapper userMapper;
+    AccountMapper accountMapper;
 
     @Test
     public void contextLoads() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        System.out.println(bCryptPasswordEncoder.encode("Cqzod@123"));
+        System.out.println(bCryptPasswordEncoder.encode("qxd123456"));
     }
 }

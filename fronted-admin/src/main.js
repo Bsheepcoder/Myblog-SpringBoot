@@ -12,7 +12,7 @@ import App from './App.vue'
 const app = createApp(App)
 
 //配置后端服务地址
-axios.defaults.baseURL = 'https://www.husile.top:8081'
+axios.defaults.baseURL = 'http://localhost:8081'
 app.use(ElementPlus)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)

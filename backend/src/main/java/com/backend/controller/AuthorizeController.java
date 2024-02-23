@@ -1,19 +1,25 @@
 package com.backend.controller;
 import com.backend.common.core.response.BlogResponse;
+import com.backend.entity.AccountEntity;
+import com.backend.param.auth.LoginParam;
+import com.backend.service.AccountService;
 import com.backend.service.AuthorizeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import static com.backend.controller.ValidateController.SESSION_KEY_IMAGE_CODE;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -30,13 +36,38 @@ public class AuthorizeController {
     @Resource
     AuthorizeService service;
 
+    @Resource
+    AccountService accountService;
 
-    //邮箱验证
+    /**
+     * 登录接口
+     * @param param
+     * @return
+     */
+    @PostMapping("/login")
+    @Operation(summary = "用户登录",description = "用户登录")
+    public BlogResponse login(@Valid LoginParam param,HttpSession session){
+        try{
+            AccountEntity entity = accountService.findAccountByNameOrEmail(param.getUsername(),null);
+            if(session.getAttribute(SESSION_KEY_IMAGE_CODE) != param.getCode()){
+                return BlogResponse.error("验证码错误！");
+            }
+            if(entity != null){
+                BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+                if(entity.getPassword() == bCryptPasswordEncoder.encode(param.getPassword())){
+                    return BlogResponse.success("登录成功！");
+                }
+            }
+            return BlogResponse.error("用户名或密码错误！");
+        }catch (Exception e){
+            log.info(e.getMessage());
+            return BlogResponse.error("系统错误！");
+        }
+    }
+
     @PostMapping("/valid-register-email")
-    @Operation(summary = "邮箱验证",description = "验证登录的邮箱")
+    @Operation(summary = "注册-验证邮箱",description = "用户注册时验证邮箱")
     public BlogResponse validateRegisterEmail(@Pattern (regexp = EMAIL_REGEX )@RequestParam("email") String email, HttpSession session){
-
-        System.out.println("这里");
         String s =  service.sendValidateEmail(email,session.getId(),false);
 
         if(s == null)
@@ -46,7 +77,7 @@ public class AuthorizeController {
     }
 
     @PostMapping("/valid-reset-email")
-    @Operation(summary = "获取验证码",description = "通过邮箱获取验证码")
+    @Operation(summary = "重置密码验证邮箱",description = "重置密码时验证邮箱")
     public BlogResponse validateResetEmail(@Pattern (regexp = EMAIL_REGEX )@RequestParam("email") String email, HttpSession session){
         String s =  service.sendValidateEmail(email,session.getId(),true);
         if(s == null)
@@ -56,7 +87,6 @@ public class AuthorizeController {
     }
 
 
-    //用户注册
     @PostMapping("/register")
     @Operation(summary = "用户注册",description = "注册新账户")
     public BlogResponse registerUser(@Pattern(regexp = USERNAME_REGEX)@RequestParam("username") String username,
@@ -73,7 +103,7 @@ public class AuthorizeController {
     }
 
     @PostMapping("/start-rest")
-    @Operation(summary = "用户注册",description = "注册新账户")
+    @Operation(summary = "重置密码",description = "重置密码")
     public BlogResponse startRest(@RequestParam("email") String email,
                                   @Length(min = 6,max = 6) @RequestParam("code") String code,
                                   HttpSession session){

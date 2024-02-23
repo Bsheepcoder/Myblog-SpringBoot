@@ -36,10 +36,9 @@ public class ValidateController {
 
         //图形验证码写出，可以写出到文件，也可以写出到流
         //输出浏览器
-        OutputStream out=response.getOutputStream();
+        OutputStream out= response.getOutputStream();
         captcha.write(out);
         out.flush();
         out.close();
-
     }
 }

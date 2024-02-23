@@ -2,17 +2,17 @@
 <template>
     <transition  name="el-fade-in-linear" mode="out-in">
         <div style="height: 100%" v-if="active === 0">
-            <div style="margin-top: 130px;text-align: center">
+            <div style="padding:20px;text-align: center">
                 <div style="font-size: 25px">重置密码</div>
                 <div style="font-size: 14px">请输入账户的电子邮件地址</div>
             </div>
-            <div style="padding: 10px;margin-top: 20px;" >
+            <div style="padding: 10px;" >
                 <el-steps :active="active" finish-status="success" style="font-size: 14px" align-center>
                     <el-step title="验证邮箱"></el-step>
                     <el-step title="重设密码"></el-step>
                 </el-steps>
             </div>
-            <div style="margin-top: 30px;padding: 20px;">
+            <div style="padding: 20px;">
                 <el-form  :model="form" :rules="rules" @validate="onValidate" ref="formRef">
                     <el-form-item prop="email">
                         <el-input v-model="form.email"  type="email" placeholder="邮箱">
@@ -22,8 +22,8 @@
                         </el-input>
                     </el-form-item>
                     <el-form-item prop="code">
-                        <el-row :gutter="10" style="display:flow; width:100%;">
-                            <el-col :span="17" >
+                        <el-row :gutter="10" style=" width:100%;">
+                            <el-col :span="16" >
                                 <el-input v-model="form.code" :maxLength="6" type="text" :maxlength="6" placeholder="验证码">
                                     <template #prefix>
                                         <el-icon><EditPen /></el-icon>

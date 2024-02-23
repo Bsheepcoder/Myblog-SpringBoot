@@ -1,9 +1,9 @@
 <template>
     <div style="text-align: center;margin: 0 20px;">
-        <div style="margin-top: 150px">
+        <div style="padding: 20px">
             <div style="font-size: 30px;padding: 20px">登录</div>
         </div>
-        <div style="margin-top: 50px">
+        <div style="">
             <el-input v-model="form.username" type="text" placeholder="用户名">
                 <template #prefix>
                     <el-icon><User /></el-icon>
@@ -16,11 +16,11 @@
             </el-input>
         </div>
         <div style="margin-top: 10px">
-            <div  style="display: flex;justify-items: center ;align-items: center;margin-left: 100px">
-                <el-input v-model="code.imageCode" type="text" placeholder="请输入验证码"></el-input>
-                <div class="code" @click="refreshCode" title="刷新验证码" style="margin-left: 40px">
-                    <img class="verification-code" :src="verificationUrl" alt="验证码" />
-                </div>
+            <div  style="display:flex;justify-items: center ;align-items: center;margin-left: 100px">
+              <div class="code" @click="refreshCode" title="刷新验证码" style="margin-left: 10px">
+                <img class="verification-code"  v-if="verificationUrl" :src="verificationUrl"  alt="验证码"/>
+              </div>
+              <el-input v-model="code.imageCode" type="text" placeholder="请输入验证码"></el-input>
             </div>
         </div>
         <div style="margin-top: 10px">
@@ -80,7 +80,6 @@ const code = reactive(
 )
 
 const login = () =>{
-
     if(!form.username || !form.password){
         ElMessage.warning('请填写用户名和密码！')
     }else{
@@ -92,28 +91,31 @@ const login = () =>{
         }, (message)=>{
             ElMessage.success(message)
             router.push('/index')
+        },(message)=>{
+          ElMessage.error(message)
         })
     }
 }
 
 
 // 验证码请求地址
-const verificationUrl = ref()
+const verificationUrl = ref('')
 
 /**
  * 点击刷新
  */
-const refreshCode = async (params) => {
-    get('/code/image',(msg)=>{
-        console.log(msg)
-        verificationUrl.value  = window.URL.createObjectURL(msg)
-    })
+const refreshCode = async () => {
+  axios.get('/code/image',{ responseType: 'blob' })
+  .then(response => {
+    const blob = new Blob([response.data], { type: 'image/jpeg' }); // 假设图片类型为JPEG
+    verificationUrl.value = URL.createObjectURL(blob);
+  })
+  .catch(error => {
+    console.error('Error fetching captcha:', error);
+  });
 }
 
+refreshCode();
 
-//
-// defineExpose({
-//     refreshCode,
-// });
 
 </script>

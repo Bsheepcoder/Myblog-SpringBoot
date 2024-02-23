@@ -2,11 +2,11 @@
 
 <template>
     <div style="text-align: center;margin: 0 20px">
-        <div style="margin-top: 70px">
+        <div style="padding: 20px">
             <div style="font-size: 25px">注册新用户</div>
             <div style="font-size: 14px">欢迎注册，请填写相关信息</div>
         </div>
-        <div style="margin-top: 50px">
+        <div style="">
             <el-form  :model="form" :rules="rules" @validate="onValidate" ref="formRef">
                 <el-form-item prop="username">
                     <el-input v-model="form.username" :maxlength="8" type="text" placeholder="用户名">
@@ -37,15 +37,15 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item prop="code">
-                    <el-row :gutter="10" style="display:flow; width:100%;">
-                        <el-col :span="17" style="display: flex">
+                    <el-row :gutter="10" style="width:100%;">
+                        <el-col :span="16" style="">
                             <el-input v-model="form.code" :maxLength="6" type="text" :maxlength="6" placeholder="验证码">
                                 <template #prefix>
                                     <el-icon><EditPen /></el-icon>
                                 </template>
                             </el-input>
                         </el-col>
-                        <el-col :span="6" style="margin-top: 10px;">
+                        <el-col :span="6" style="">
                             <el-button type="success" @click="validateEmail"
                                        :disabled="!isEmailValid|| coldTime>0">
                                 {{ coldTime > 0 ? '请稍后'+coldTime+'秒':'获取验证码' }}
@@ -151,7 +151,7 @@ const register = () => {
     })
 }
 const validateEmail = () =>{
-    post('/api/auth/valid-email',{
+    post('/api/auth/valid-reset-email',{
         email:form.email
     },(message)=>{
         ElMessage.success(message)
