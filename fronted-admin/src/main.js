@@ -9,8 +9,11 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import router from './router'
 import axios from "axios";
 import App from './App.vue'
+import store from './stores'; // 导入 Vuex store
 const app = createApp(App)
 
+
+createApp(App).use(store).mount('#app');
 //配置后端服务地址
 axios.defaults.baseURL = 'http://localhost:8081'
 app.use(ElementPlus)

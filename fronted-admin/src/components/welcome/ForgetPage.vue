@@ -48,7 +48,7 @@
     </transition>
     <transition  name="el-fade-in-linear" mode="out-in">
         <div style="padding: 20px" v-if="active === 1">
-            <div style="margin-top: 130px;text-align: center">
+            <div style="text-align: center">
                 <div style="font-size: 25px">重置密码</div>
                 <div style="font-size: 14px">请重复输入新密码</div>
             </div>
@@ -172,7 +172,7 @@ const doReset = () =>{
                 password:form.password
             }, () =>{
                 ElMessage.success('密码重置成功！')
-                router.push('/')
+                window.location.href = "/";
             })
         }else{
             ElMessage.warning('请填写新密码')

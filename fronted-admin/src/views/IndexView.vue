@@ -49,7 +49,7 @@
 
                 <el-main>
                   <div>
-                    <div v-if="loggedIn">Welcome, {{ username }}</div>
+                    <div v-if="mapState(['isAuthenticated'])">Welcome, {{ username }}</div>
                     <div v-else>Please log in</div>
                     <button @click="checkLogin">Check Login Status</button>
                   </div>
@@ -147,11 +147,9 @@ import {
     Setting,
 } from "@element-plus/icons-vue";
 import { ref } from "vue";
-import { ArrowDown } from '@element-plus/icons-vue'
 import ShowView from "@/components/show/showView.vue";
 import axios from "axios";
-
-
+import {mapActions, mapState, useStore} from 'vuex';
 const loggedIn = ref(false);
 const username = ref('');
 
@@ -169,10 +167,12 @@ const checkLogin = () => {
         }
       });
 };
-
+const store = useStore();
 const logout = () => {
     get("/api/auth/logout", (message) => {
         ElMessage.success("注销成功！");
+        store.dispatch('logout')
+        console.log(store.state.isAuthenticated)
         router.push("/");
     });
 };

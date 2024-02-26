@@ -63,7 +63,7 @@ import {ElMessage} from "element-plus";
 import router from "@/router";
 import axios from "axios";
 import {post} from "@/net";
-
+import {mapActions, mapState, useStore} from 'vuex';
 
 const form = reactive({
     username:'',
@@ -78,7 +78,7 @@ const code = reactive(
     }
 )
 
-
+const store = useStore()
 const login = () =>{
     if(!form.username || !form.password){
         ElMessage.warning('请填写用户名和密码！')
@@ -90,6 +90,8 @@ const login = () =>{
             imageCode:form.imageCode
         }, (msg)=>{
             ElMessage.success("登录成功！")
+            store.dispatch('login')
+            console.log(store.state.isAuthenticated)
             router.push('/index')
         },(msg)=>{
             ElMessage.error("用户名或密码错误！")
