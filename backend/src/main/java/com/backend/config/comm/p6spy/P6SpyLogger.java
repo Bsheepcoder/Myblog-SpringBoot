@@ -7,7 +7,7 @@ package com.backend.config.comm.p6spy;
  */
 
 import com.backend.entity.AccountEntity;
-import com.backend.common.core.utils.CUtil;
+import com.backend.common.utils.CUtil;
 import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;

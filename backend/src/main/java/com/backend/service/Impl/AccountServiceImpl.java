@@ -27,7 +27,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, AccountEntity
     @Resource
     AccountMapper accountMapper;
 
-    AccountEntity findAccountByNameOrEmail(String username,String mail){
+    public AccountEntity findAccountByNameOrEmail(String username,String mail){
         return accountMapper.findAccountByNameOrEmail(username,mail);
     }
 }

@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
  * @date: 2024/2/23
  * @description:
  */
+
 @Service
 public interface AccountService  extends IService<AccountEntity> {
 
-    AccountEntity findAccountByNameOrEmail(String username,String mail);
+    public AccountEntity findAccountByNameOrEmail(String username,String mail);
 }

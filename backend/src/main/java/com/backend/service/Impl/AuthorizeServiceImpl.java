@@ -1,5 +1,6 @@
 package com.backend.service.Impl;
 
+import com.backend.common.utils.CodeUtil;
 import com.backend.entity.AccountEntity;
 import com.backend.mapper.AccountMapper;
 import com.backend.service.AuthorizeService;
@@ -20,7 +21,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -71,30 +71,30 @@ public class AuthorizeServiceImpl implements AuthorizeService {
          *  5.用户在注册时，再从Redis里面取出对应键值对，然后看验证码是否一致
          */
         String key = "email:" + sessionId + ":" + email + ":"+hasAccount;
+
         if(Boolean.TRUE.equals(template.hasKey(key))){
             Long expire = Optional.ofNullable(template.getExpire(key,TimeUnit.SECONDS)).orElse(0L);
             if(expire > 120) return "请求频繁，请稍后再试";
         }
         AccountEntity accountEntity = accountMapper.findAccountByNameOrEmail(null,email);
 
-        if(hasAccount  && accountEntity == null)
+        if( hasAccount  && accountEntity == null)
             return "此邮箱没有注册";
         if(!hasAccount && accountEntity != null){
-            return "此邮箱已被其他用户注册";
+            return "此邮箱已被其他用户注册,请更换邮箱！";
         }
 
-        Random random  = new Random();
-        int code =random.nextInt(999999);
+        String code = CodeUtil.getCode();
         //创建一个邮件对象
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(email);
         message.setSubject("您的验证邮件");
-        message.setText("您好，欢迎注册物流中台系统，验证码为：" + code);
+        message.setText("您好，欢迎注册博客系统，验证码为：" + code);
         try{
             //发送邮件
             mailSender.send(message);
-            template.opsForValue().set(key,String.valueOf(code),3,TimeUnit.MINUTES);
+            template.opsForValue().set(key,code,3,TimeUnit.MINUTES);
             return null;
         }  catch (MailException e){
             e.printStackTrace();
@@ -105,22 +105,15 @@ public class AuthorizeServiceImpl implements AuthorizeService {
     @Override
     public String validateAndRegister(String username,String password,String email,String code,String sessionId){
         String key = "email:" + sessionId + ":" + email + ":false";
-
         if(Boolean.TRUE.equals(template.hasKey(key))){
             String s = template.opsForValue().get(key);
-
             if(s == null) return "验证码失效，请重新请求";
             if(s.equals(code)){
                 //清除redis的code
                 template.delete(key);
                 AccountEntity accountEntity = accountMapper.findAccountByNameOrEmail(username,null);
-                password = encoder.encode(password); //加密
                 if(accountEntity != null) return "此用户名已被注册，请更换用户名";
-                if(accountMapper.createAccount(username,password,email)){
-                    return null;
-                }else{
-                    return "内部错误，请联系管理员";
-                }
+                return null;
             }else{
                 return "验证码错误，请检查后再提交";
             }

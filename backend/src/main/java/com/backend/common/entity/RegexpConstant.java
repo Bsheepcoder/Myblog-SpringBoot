@@ -1,4 +1,4 @@
-package com.backend.common.core.entity;
+package com.backend.common.entity;
 
 import java.util.regex.Pattern;
 

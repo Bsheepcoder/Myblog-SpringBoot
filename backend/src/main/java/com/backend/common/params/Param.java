@@ -1,4 +1,4 @@
-package com.backend.common.core.params;
+package com.backend.common.params;
 
 import org.springframework.beans.BeanUtils;
 

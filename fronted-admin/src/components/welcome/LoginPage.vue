@@ -20,7 +20,7 @@
               <div class="code" @click="refreshCode" title="刷新验证码" style="margin-left: 10px">
                 <img class="verification-code"  v-if="verificationUrl" :src="verificationUrl"  alt="验证码"/>
               </div>
-              <el-input v-model="code.imageCode" type="text" placeholder="请输入验证码"></el-input>
+              <el-input v-model="form.imageCode" type="text" placeholder="请输入验证码"></el-input>
             </div>
         </div>
         <div style="margin-top: 10px">
@@ -61,16 +61,15 @@ import {Lock, User} from "@element-plus/icons-vue";
 import {reactive, ref} from "vue";
 import {ElMessage} from "element-plus";
 import router from "@/router";
-import {get, post} from "@/net";
 import axios from "axios";
-//import { Service } from "@basic-library";
+import {post} from "@/net";
 
 
 const form = reactive({
     username:'',
     password:'',
     remember:false,
-    imageCode:'',
+    imageCode:''
 })
 
 const code = reactive(
@@ -78,6 +77,7 @@ const code = reactive(
         nowCode:'',
     }
 )
+
 
 const login = () =>{
     if(!form.username || !form.password){
@@ -87,13 +87,17 @@ const login = () =>{
             username:form.username,
             password:form.password,
             remember:form.remember,
-            imageCode:form.imageCode,
-        }, (message)=>{
-            ElMessage.success(message)
+            imageCode:form.imageCode
+        }, (msg)=>{
+            ElMessage.success("登录成功！")
             router.push('/index')
-        },(message)=>{
-          ElMessage.error(message)
-        })
+        },(msg)=>{
+            ElMessage.error("用户名或密码错误！")
+            refreshCode()
+        },(msg)=>{
+            console.log(msg)
+            ElMessage.error(msg.response.data)
+        });
     }
 }
 
@@ -104,6 +108,8 @@ const verificationUrl = ref('')
 /**
  * 点击刷新
  */
+//允许跨域携带cookie信息
+axios.defaults.withCredentials = true
 const refreshCode = async () => {
   axios.get('/code/image',{ responseType: 'blob' })
   .then(response => {
@@ -111,7 +117,7 @@ const refreshCode = async () => {
     verificationUrl.value = URL.createObjectURL(blob);
   })
   .catch(error => {
-    console.error('Error fetching captcha:', error);
+    ElMessage.error("验证码获取失败！");
   });
 }
 

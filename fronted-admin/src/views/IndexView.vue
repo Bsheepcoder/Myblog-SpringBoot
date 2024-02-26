@@ -48,6 +48,11 @@
                 </el-aside>
 
                 <el-main>
+                  <div>
+                    <div v-if="loggedIn">Welcome, {{ username }}</div>
+                    <div v-else>Please log in</div>
+                    <button @click="checkLogin">Check Login Status</button>
+                  </div>
                     <div style="background-color: white;border-radius: 7px;padding: 20px;box-shadow: 1px 1px 10px #babcbe">
                     <show-view></show-view>
                     </div>
@@ -144,10 +149,30 @@ import {
 import { ref } from "vue";
 import { ArrowDown } from '@element-plus/icons-vue'
 import ShowView from "@/components/show/showView.vue";
+import axios from "axios";
+
+
+const loggedIn = ref(false);
+const username = ref('');
+
+const checkLogin = () => {
+  axios.get('/api/auth/user')
+      .then(response => {
+        loggedIn.value = true; // 如果请求成功，说明用户已登录
+        username.value = response.data
+      })
+      .catch(error => {
+        if (error.response && error.response.status === 401) {
+          loggedIn.value = false; // 如果返回 401 状态码，说明用户未登录
+        } else {
+          console.error('Failed to check login status:', error);
+        }
+      });
+};
 
 const logout = () => {
     get("/api/auth/logout", (message) => {
-        ElMessage.success(message);
+        ElMessage.success("注销成功！");
         router.push("/");
     });
 };

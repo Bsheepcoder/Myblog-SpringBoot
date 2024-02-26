@@ -1,7 +1,7 @@
-package com.backend.common.core.utils;
+package com.backend.common.utils;
 
 import com.alibaba.fastjson.JSONObject;
-import com.backend.common.core.entity.RegexpConstant;
+import com.backend.common.entity.RegexpConstant;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;

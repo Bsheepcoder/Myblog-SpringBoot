@@ -1,7 +1,7 @@
 package com.backend.config.comm.mybatis;
 
-import com.backend.common.core.utils.BlogUtil;
-import com.backend.common.core.utils.CUtil;
+import com.backend.common.utils.BlogUtil;
+import com.backend.common.utils.CUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.binding.MapperMethod.ParamMap;
 import org.apache.ibatis.executor.Executor;
@@ -34,7 +34,7 @@ public class MybatisInterceptor implements Interceptor {
         if (parameter == null) {
             return invocation.proceed();
         }
-        String userId = CUtil.getCurrentUserInfo().getAid().toString();
+        String userId = CUtil.getCurrentUserInfo().getAid();
         if (SqlCommandType.INSERT == sqlCommandType) {
             Field[] fields = CUtil.getAllFields(parameter);
             for (Field field : fields) {

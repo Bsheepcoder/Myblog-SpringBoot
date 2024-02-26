@@ -1,6 +1,6 @@
 package com.backend.config.comm.mybatis;
 
-import com.backend.common.core.utils.mybatis.IdGeneratorUtil;
+import com.backend.common.utils.mybatis.IdGeneratorUtil;
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

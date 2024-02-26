@@ -47,7 +47,7 @@
                         </el-col>
                         <el-col :span="6" style="">
                             <el-button type="success" @click="validateEmail"
-                                       :disabled="!isEmailValid|| coldTime>0">
+                                       :disabled="!isEmailValid|| coldTime > 0">
                                 {{ coldTime > 0 ? '请稍后'+coldTime+'秒':'获取验证码' }}
                             </el-button>
                         </el-col>
@@ -111,7 +111,7 @@ const rules = {
         { min: 2, max: 10, message: '用户名长度必须在2-10个字符之间', trigger: ['blur','change'] },
     ],
     password:[
-        {required: true,message: '请输入密码',tigger: 'blur'},
+        {required: true,message: '请输入密码', tigger: 'blur'},
         { min: 6, max: 16, message: '密码长度必须在6-16个字符之间', trigger: ['blur','change'] },
     ],
     password_repeat:[
@@ -132,6 +132,7 @@ const coldTime = ref(0)
 const onValidate = (prop,isValid)=>{
     if(prop==='email')
         isEmailValid.value = isValid
+
 }
 const register = () => {
     formRef.value.validate((isValid)=>{
@@ -144,20 +145,30 @@ const register = () => {
             },(message)=>{
                 ElMessage.success(message)
                 router.push("/")
+            },(msg)=>{
+                ElMessage.error(msg)
+            },(msg)=>{
+                ElMessage.error(msg)
             })
         }else{
             ElMessage.warning('请完整填写上述表单注册内容')
         }
     })
 }
+
+// 注册邮箱验证
 const validateEmail = () =>{
-    post('/api/auth/valid-reset-email',{
+    post('/api/auth/valid-register-email',{
         email:form.email
-    },(message)=>{
-        ElMessage.success(message)
+    },(msg)=>{
+        ElMessage.success(msg)
         coldTime.value = 60
-        setInterval(()=>coldTime.value--,1000)
-    } )
+        setInterval(()=> coldTime.value--,1000)
+    },(message)=>{
+        ElMessage.warning(message)
+    },(message)=>{
+        ElMessage.error(message)
+    })
 }
 </script>
 

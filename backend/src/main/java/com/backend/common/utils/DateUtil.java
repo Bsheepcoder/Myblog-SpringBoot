@@ -1,4 +1,4 @@
-package com.backend.common.core.utils;
+package com.backend.common.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

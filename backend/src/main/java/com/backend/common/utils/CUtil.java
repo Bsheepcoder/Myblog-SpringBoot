@@ -1,6 +1,6 @@
-package com.backend.common.core.utils;
+package com.backend.common.utils;
 
-import com.backend.common.core.utils.mybatis.IdGeneratorUtil;
+import com.backend.common.utils.mybatis.IdGeneratorUtil;
 import com.backend.config.comm.holder.DefaultInfoContextHolder;
 import com.backend.entity.AccountEntity;
 import jakarta.servlet.http.HttpServletRequest;

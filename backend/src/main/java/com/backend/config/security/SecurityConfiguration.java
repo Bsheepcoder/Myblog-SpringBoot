@@ -1,13 +1,12 @@
-package com.backend.config;
+package com.backend.config.security;
 
 import com.alibaba.fastjson.JSONObject;
-import com.backend.common.core.response.BlogResponse;
-import com.backend.filter.ValidateCodeFilter;
+import com.backend.common.response.BlogResponse;
+import com.backend.config.security.filter.ValidateCodeFilter;
 import com.backend.service.AuthorizeService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,7 +37,7 @@ public class SecurityConfiguration {
     @Resource
     DataSource dataSource;
 
-    @Autowired
+    @Resource
     private ValidateCodeFilter validateCodeFilter;
 
     @Bean
@@ -108,7 +107,7 @@ public class SecurityConfiguration {
                 .build();
     }
 
-
+    //替换passwordEncoder
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -126,4 +125,5 @@ public class SecurityConfiguration {
         response.setCharacterEncoding("utf-8");
         response.getWriter().write(JSONObject.toJSONString(BlogResponse.error(401,exception.getMessage())));
     }
+
 }

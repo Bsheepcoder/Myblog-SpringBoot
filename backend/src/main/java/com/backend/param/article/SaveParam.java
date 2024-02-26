@@ -1,6 +1,6 @@
 package com.backend.param.article;
 
-import com.backend.common.core.params.Param;
+import com.backend.common.params.Param;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

@@ -1,7 +1,7 @@
 package com.backend.controller;
 
-import com.backend.common.core.entity.StringConstant;
-import com.backend.common.core.response.BlogResponse;
+import com.backend.common.entity.StringConstant;
+import com.backend.common.response.BlogResponse;
 import com.backend.entity.ArticleEntity;
 import com.backend.param.article.SaveParam;
 import com.backend.service.ArticleService;
