@@ -77,8 +77,7 @@ const code = reactive(
         nowCode:'',
     }
 )
-
-const store = useStore()
+const store = useStore();
 const login = () =>{
     if(!form.username || !form.password){
         ElMessage.warning('请填写用户名和密码！')
@@ -90,8 +89,8 @@ const login = () =>{
             imageCode:form.imageCode
         }, (msg)=>{
             ElMessage.success("登录成功！")
+            // 获取状态
             store.dispatch('login')
-            console.log(store.state.isAuthenticated)
             router.push('/index')
         },(msg)=>{
             ElMessage.error("用户名或密码错误！")

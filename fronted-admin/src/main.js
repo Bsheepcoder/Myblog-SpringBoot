@@ -12,8 +12,6 @@ import App from './App.vue'
 import store from './stores'; // 导入 Vuex store
 const app = createApp(App)
 
-
-createApp(App).use(store).mount('#app');
 //配置后端服务地址
 axios.defaults.baseURL = 'http://localhost:8081'
 app.use(ElementPlus)
@@ -22,4 +20,5 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 app.use(createPinia())
 app.use(router)
+app.use(store);
 app.mount('#app')
