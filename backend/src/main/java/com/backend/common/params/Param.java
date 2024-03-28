@@ -1,7 +1,6 @@
 package com.backend.common.params;
 
 import org.springframework.beans.BeanUtils;
-
 import java.io.Serializable;
 
 /**
