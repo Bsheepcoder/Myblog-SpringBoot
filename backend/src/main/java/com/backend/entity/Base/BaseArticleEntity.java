@@ -16,27 +16,51 @@ public class BaseArticleEntity extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     *  文章ID
+     */
     @TableId(type = IdType.ASSIGN_ID)
-    BigDecimal articleid;
+    String articleid;
 
-    @TableField(value = "aid")
-    BigDecimal aid;
+    /**
+     *  用户ID
+     */
+    @TableField(value = "accountid")
+    String accountid;
 
+    /**
+     *  文章标题
+     */
     @TableField(value = "title")
     String title;
 
+    /**
+     *  文章简介
+     */
     @TableField(value = "overview")
     String overview;
 
+    /**
+     *  文章正文
+     */
     @TableField(value = "content")
     String content;
 
+    /**
+     *  查看数
+     */
     @TableField(value = "viewcount")
     Integer viewcount;
 
+    /**
+     *  喜欢数
+     */
     @TableField(value = "likecount")
     Integer likecount;
 
+    /**
+     *  分享数
+     */
     @TableField(value = "sharecount")
     Integer sharecount;
 }

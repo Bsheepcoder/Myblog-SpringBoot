@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @description:
  */
 
-@TableName("articletag")
+@TableName("article_tag")
 public class ArticleTagEntity extends BaseArticleTagEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

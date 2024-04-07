@@ -43,11 +43,12 @@ public class AuthorizeController {
     @PostMapping("/valid-register-email")
     @Operation(summary = "注册-验证邮箱",description = "用户注册时验证邮箱")
     public BlogResponse validateRegisterEmail(@Pattern (regexp = EMAIL_REGEX )@RequestParam("email") String email, HttpSession session){
-        String s =  service.sendValidateEmail(email,session.getId(),false);
-        if(s == null)
-            return BlogResponse.success("邮件已发送,请注意查收");
-        else
-            return BlogResponse.error(400,s);
+        try{
+            return BlogResponse.success(service.sendValidateEmail(email,session.getId(),false));
+        }catch (Exception e){
+            log.info(e.getMessage());
+            return BlogResponse.error();
+        }
     }
 
     @PostMapping("/valid-reset-email")

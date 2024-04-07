@@ -3,6 +3,7 @@ package com.backend.param.article;
 import com.backend.common.params.Param;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,11 +18,11 @@ import java.math.BigDecimal;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@ApiModel(value = "文章查询参数",description = "文章查询参数")
+@Schema(name = "文章-修改保存参数",description = "文章-修改保存参数")
 public class SaveParam extends Param {
 
     @ApiModelProperty(value = "用户ID")
-    BigDecimal aid;
+    String accountid;
 
     @ApiModelProperty(value = "标题")
     String title;

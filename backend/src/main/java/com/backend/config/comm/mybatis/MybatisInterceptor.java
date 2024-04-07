@@ -34,7 +34,7 @@ public class MybatisInterceptor implements Interceptor {
         if (parameter == null) {
             return invocation.proceed();
         }
-        String userId = CUtil.getCurrentUserInfo().getAid();
+        String userId = CUtil.getCurrentUserInfo().getAccountid();
         if (SqlCommandType.INSERT == sqlCommandType) {
             Field[] fields = CUtil.getAllFields(parameter);
             for (Field field : fields) {

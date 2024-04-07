@@ -3,6 +3,7 @@ package com.backend.param.auth;
 import com.backend.common.params.Param;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,7 +15,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@ApiModel(value = "登录参数")
+@Schema(name = "登录参数")
 public class LoginParam extends Param {
 
     @ApiModelProperty(value = "用户名",required = true)

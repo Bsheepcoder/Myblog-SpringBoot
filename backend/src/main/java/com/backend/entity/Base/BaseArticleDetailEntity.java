@@ -23,21 +23,41 @@ public class BaseArticleDetailEntity extends BaseEntity implements Serializable 
 
     private static final long serialVersionUID = 1L;
 
+
+    /**
+     * 用户详情ID
+     */
     @TableId(type = IdType.ASSIGN_ID)
-    BigDecimal adid;
+    String accountdetialid;
 
-    @TableField(value = "aid")
-    BigDecimal aid;
 
+    /**
+     * 用户ID
+     */
+    @TableField(value = "accountid")
+    String accountid;
+
+    /**
+     * 昵称
+     */
     @TableField(value = "nickname")
     String nickname;
 
+    /**
+     * 电话
+     */
     @TableField(value = "phonenumber")
     String phonenumber;
 
+    /**
+     * 照片
+     */
     @TableField(value = "headpicture")
     String headpicture;
 
+    /**
+     * 生日
+     */
     @TableField(value = "birthday")
     Date birthday;
 

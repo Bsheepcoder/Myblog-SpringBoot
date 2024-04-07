@@ -15,12 +15,24 @@ public class BaseArticleTagEntity extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+
+    /**
+     *  文章标签ID
+     */
     @TableId(type = IdType.ASSIGN_ID)
     BigDecimal articletagid;
 
+
+    /**
+     *  文章ID
+     */
     @TableField(value = "articleid")
     BigDecimal articleid;
 
+
+    /**
+     *  标签ID
+     */
     @TableField(value = "tagid")
     BigDecimal tagid;
 }

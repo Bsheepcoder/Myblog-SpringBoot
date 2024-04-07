@@ -28,13 +28,13 @@ public class ArticleController {
 
     @PostMapping ("/save")
     @Operation(summary = "批量新增或修改文章",description = "批量新增或修改文章")
-    public BlogResponse addArticle(@Valid List<SaveParam> params){
+    public BlogResponse addArticle(@Valid @RequestBody List<SaveParam> params){
         try{
             articleService.saveOrUpdateBatch(params.stream().map(e -> e.convert(new ArticleEntity())).collect(Collectors.toList()));
             return BlogResponse.success("添加成功！");
         }catch (Exception e){
             log.error(e.getMessage());
-            return BlogResponse.error(500,"接口添加失败！");
+            return BlogResponse.error(500,"文章添加失败！");
         }
     }
 
@@ -52,7 +52,7 @@ public class ArticleController {
 
     @GetMapping("/page")
     @Operation(summary = "查询文章内容",description = "查询文章内容")
-    public BlogResponse getArticle(@RequestParam("aid") int aid){
+    public BlogResponse getArticle(@RequestParam("aid") String aid){
         try{
             return BlogResponse.success(articleService.getById(aid));
         }catch (Exception e){

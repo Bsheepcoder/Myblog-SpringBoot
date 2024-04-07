@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @description:
  */
 
-@TableName("articledetail")
+@TableName("article_detail")
 public class ArticleDetailEntity extends BaseArticleDetailEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

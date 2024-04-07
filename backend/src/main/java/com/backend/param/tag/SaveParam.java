@@ -3,6 +3,7 @@ package com.backend.param.tag;
 import com.backend.common.params.Param;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,7 +15,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@ApiModel(value = "文章查询参数",description = "文章查询参数")
+@Schema(name = "标签-修改保存参数",description = "标签-修改保存参数")
 public class SaveParam extends Param {
 
 

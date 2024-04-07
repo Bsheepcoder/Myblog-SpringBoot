@@ -39,7 +39,7 @@ public class TagController {
 
     @PostMapping("/save")
     @Operation(summary = "批量新增或更新",description = "批量新增或更新标签")
-    public BlogResponse addTag(@Valid List<SaveParam> params){
+    public BlogResponse addTag(@Valid @RequestBody List<SaveParam> params){
         try{
             return BlogResponse.success(tagService.saveOrUpdateBatch(params.stream().map(e -> e.convert(new TagEntity())).collect(Collectors.toList())));
         }catch (Exception e){

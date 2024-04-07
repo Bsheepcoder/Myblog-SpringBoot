@@ -16,17 +16,17 @@ spring:
     password: ${mysql.password}
     url: jdbc:p6spy:mysql://${mysql.url}:3306/blog?characterEncoding=utf8&useSSL=false
     dynamic:
-      p6spy: true
+      p6spy: false
   mail:
     host: smtp.163.com
-    username: ${mail.username}
+    username: 18947336207@163.com
     password: ${mail.password}
     properties:
       from: qxd
   data:
     redis:
       database: 0
-      host: ${redis.host}
+      host: 111.229.16.141
       port: 6379
       jedis:
         pool:

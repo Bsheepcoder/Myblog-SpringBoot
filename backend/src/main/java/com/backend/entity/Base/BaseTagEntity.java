@@ -15,16 +15,27 @@ import java.math.BigDecimal;
 public class BaseTagEntity extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    /**
+     *  标签ID
+     */
     @TableId(type = IdType.ASSIGN_ID)
     BigDecimal tagid;
 
+    /**
+     *  父级标签ID
+     */
     @TableField(value = "parent")
     String parent;
 
+    /**
+     *  层级
+     */
     @TableField(value = "levels")
     String levels;
 
+    /**
+     * 标签名
+     */
     @TableField(value = "tagname")
     String tagname;
 }

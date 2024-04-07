@@ -21,15 +21,27 @@ public class BaseAccountEntity extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 用户ID
+     */
     @TableId(type = IdType.ASSIGN_ID)
-    String aid;
+    String accountid;
 
+    /**
+     * 用户名
+     */
     @TableField(value = "username")
     String username;
 
+    /**
+     * 密码
+     */
     @TableField(value = "password")
     String password;
 
+    /**
+     * 邮箱
+     */
     @TableField(value = "mail")
     String mail;
 }
