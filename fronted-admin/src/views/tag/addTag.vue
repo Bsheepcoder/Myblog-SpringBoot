@@ -14,14 +14,13 @@
                         <el-input v-model="form.tagName" />
                     </el-form-item>
                 </el-form>
-
                 <template #footer>
-              <span class="dialog-footer">
-                <el-button @click="dialogVisible = false">取消</el-button>
-                <el-button type="primary" @click="onSubmitTag()">
-                    确认
-                </el-button>
-              </span>
+                  <span class="dialog-footer">
+                    <el-button @click="dialogVisible = false">取消</el-button>
+                    <el-button type="primary" @click="onSubmitTag()">
+                        确认
+                    </el-button>
+                  </span>
                 </template>
             </el-dialog>
         </div>
@@ -32,28 +31,28 @@
 <script setup>
 import {inject, reactive, ref} from "vue";
 import {ElMessage} from "element-plus";
-import {post} from "@/net";
+import {jsonpost, post} from "@/net";
 
 const form = reactive({
     tagName: '',
 })
+
 const dialogVisible = ref(false)
+
 //刷新引入
 const reload = inject('reload')
+
 const onSubmitTag = () => {
     if(form.tagName === ''){
         ElMessage.warning('请输入名称！')
     }else{
-        post('/api/tag/add',{
-            tagName:form.tagName
-        }, (message)=>{
+      const saveParam = {tagname:form.tagName,parent:1,levels:1}
+        jsonpost('/api/tag/save',[saveParam], (message)=>{
             ElMessage.success(message)
             reload()
         })
         dialogVisible.value = false
-
     }
-
 }
 
 </script>
@@ -61,4 +60,4 @@ const onSubmitTag = () => {
 <style scoped>
 
 </style>
-    
+

@@ -1,8 +1,11 @@
 package com.backend.mapper;
 
-import com.backend.entity.AccountEntity;
+
 import com.backend.entity.ArticleEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+
+import java.util.List;
 
 /**
  * @author: qxd
@@ -11,4 +14,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 
 public interface ArticleMapper extends BaseMapper<ArticleEntity> {
+
+    public List<ArticleEntity> getTagArticle(String tagid);
 }

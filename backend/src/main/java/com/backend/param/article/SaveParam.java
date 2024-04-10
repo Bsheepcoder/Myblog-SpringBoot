@@ -21,8 +21,14 @@ import java.math.BigDecimal;
 @Schema(name = "文章-修改保存参数",description = "文章-修改保存参数")
 public class SaveParam extends Param {
 
+    @ApiModelProperty(value = "文章ID")
+    String articleid;
+
     @ApiModelProperty(value = "用户ID")
     String accountid;
+
+    @ApiModelProperty(value = "标签ID")
+    String tagid;
 
     @ApiModelProperty(value = "标题")
     String title;

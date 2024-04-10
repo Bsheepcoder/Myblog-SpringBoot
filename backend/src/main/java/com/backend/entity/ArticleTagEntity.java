@@ -2,6 +2,7 @@ package com.backend.entity;
 
 import com.backend.entity.Base.BaseArticleTagEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 
 import java.io.Serializable;
 
@@ -11,6 +12,7 @@ import java.io.Serializable;
  * @description:
  */
 
+@AllArgsConstructor
 @TableName("article_tag")
 public class ArticleTagEntity extends BaseArticleTagEntity implements Serializable {
 

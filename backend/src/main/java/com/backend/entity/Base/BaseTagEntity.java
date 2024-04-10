@@ -19,7 +19,7 @@ public class BaseTagEntity extends BaseEntity implements Serializable {
      *  标签ID
      */
     @TableId(type = IdType.ASSIGN_ID)
-    BigDecimal tagid;
+    String tagid;
 
     /**
      *  父级标签ID

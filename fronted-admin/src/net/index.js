@@ -19,6 +19,9 @@ function post(url,data,success,failure = defaultFailure,error = defaultError){
     }).catch(error)
 }
 
+
+
+
 function get(url,success,failure = defaultFailure,error = defaultError){
     axios.get(url,{
         withCredentials:true
@@ -30,4 +33,35 @@ function get(url,success,failure = defaultFailure,error = defaultError){
     }).catch(error)
 }
 
-export {get,post}
+function jsonpost(url,data,success,failure = defaultFailure,error = defaultError){
+    axios.post(url,data,{
+        headers:{
+            'Content-Type':'application/json'
+        },
+        withCredentials:true
+    }).then(({data}) => {
+        if(data.success)
+            success(data.message,data.status)
+        else
+            failure(data.message,data.status)
+    }).catch(error)
+}
+
+function jsonget(url,success,failure = defaultFailure,error = defaultError){
+    axios.get(url,{
+        headers:{
+            'Content-Type':'application/json'
+        },
+        withCredentials:true
+    }).then(({data}) => {
+        if(data.success)
+            success(data.message,data.status)
+        else
+            failure(data.message,data.status)
+    }).catch(error)
+}
+
+
+
+
+export {get,post,jsonget,jsonpost}

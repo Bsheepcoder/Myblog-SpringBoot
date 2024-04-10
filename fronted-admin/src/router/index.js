@@ -12,17 +12,17 @@ const router = createRouter({
                 {
                     path:'',
                     name:'welcome-login',
-                    component:()=>import('@/components/welcome/LoginPage.vue')
+                    component:()=>import('@/views/welcome/LoginPage.vue')
                 },
                 {
                     path:'register',
                     name:'welcome-register',
-                    component:()=>import('@/components/welcome/RegisterPage.vue')
+                    component:()=>import('@/views/welcome/RegisterPage.vue')
                 },
                 {
                     path:'forget',
                     name:'welcome-forget',
-                    component:()=>import('@/components/welcome/ForgetPage.vue')
+                    component:()=>import('@/views/welcome/ForgetPage.vue')
                 }
             ]
         },{
@@ -34,31 +34,31 @@ const router = createRouter({
                 {
                     path:'/ArticleList',
                     name:'ArticleList',
-                    component:()=>import('@/components/article/ArticleList.vue'),
+                    component:()=>import('@/views/article/ArticleList.vue'),
                     meta: { requiresAuth: true }, // 需要登录才能访问
                 },
                 {
                     path:'/createArticle',
                     name:'createArticle',
-                    component:()=>import('@/components/article/createArticle.vue'),
+                    component:()=>import('@/views/article/createArticle.vue'),
                     meta: { requiresAuth: true }, // 需要登录才能访问
                 },
                 {
                     path:'/taglist',
                     name:'taglist',
-                    component:()=>import('@/components/tag/taglist.vue'),
+                    component:()=>import('@/views/tag/taglist.vue'),
                     meta: { requiresAuth: true }, // 需要登录才能访问
                 },
                 {
                     path:'/addtag',
                     name:'addtag',
-                    component:()=>import('@/components/tag/addtag.vue'),
+                    component:()=>import('@/views/tag/addtag.vue'),
                     meta: { requiresAuth: true }, // 需要登录才能访问
                 },
                 {
                     path:'/updateArticle/:aid',
                     name:'updateArticle',
-                    component:()=>import('@/components/article/updateArticle.vue'),
+                    component:()=>import('@/views/article/updateArticle.vue'),
                     meta: { requiresAuth: true }, // 需要登录才能访问
                 },
             ]

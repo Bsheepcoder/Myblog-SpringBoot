@@ -22,37 +22,37 @@
                     >
                         <el-sub-menu index="1">
                             <template #title>
-                                <el-icon><location /></el-icon>
+                                <el-icon><icon-menu /></el-icon>
                                 <span>文章管理</span>
                             </template>
-                                <el-menu-item index="1-1" @click="router.push('/ArticleList')">文章列表</el-menu-item>
+                                <el-menu-item index="1-1" @click="router.push('/ArticleList')"><el-icon><Document /></el-icon>文章列表</el-menu-item>
                                 <el-menu-item index="1-2"
                                               @click="router.push('/createArticle')"
-                                >创建文章</el-menu-item>
+                                ><el-icon><Edit /></el-icon>创建文章</el-menu-item>
                         </el-sub-menu>
                         <el-sub-menu index="2">
                             <template #title>
                                 <el-icon><icon-menu /></el-icon>
                                 <span>标签管理</span>
                             </template>
-                            <el-menu-item index="3-1" @click="router.push('/taglist')">标签列表</el-menu-item>
+                            <el-menu-item index="3-1" @click="router.push('/taglist')"><el-icon><Document /></el-icon>标签列表</el-menu-item>
                         </el-sub-menu>
                         <el-sub-menu index="3">
                             <template #title>
                                 <el-icon><icon-menu /></el-icon>
                                 <span>用户管理</span>
                             </template>
-                            <el-menu-item index="2-1">用户列表</el-menu-item>
+                            <el-menu-item index="2-1"><el-icon><Document /></el-icon>用户列表</el-menu-item>
                         </el-sub-menu>
                     </el-menu>
                 </el-aside>
 
                 <el-main>
-                  <div>
-                    <div v-if="mapState(['isAuthenticated'])">Welcome, {{ username }}</div>
-                    <div v-else>Please log in</div>
-                    <button @click="checkLogin">Check Login Status</button>
-                  </div>
+<!--                  <div>-->
+<!--                    <div v-if="mapState(['isAuthenticated'])">Welcome, {{ username }}</div>-->
+<!--                    <div v-else>Please log in</div>-->
+<!--                    <button @click="checkLogin">Check Login Status</button>-->
+<!--                  </div>-->
                     <div style="background-color: white;border-radius: 7px;padding: 20px;box-shadow: 1px 1px 10px #babcbe">
                     <show-view></show-view>
                     </div>
@@ -63,7 +63,6 @@
                             </transition>
                         </router-view>
                     </div>
-
                 </el-main>
             </el-container>
         </el-container>
@@ -147,7 +146,7 @@ import {
     Setting,
 } from "@element-plus/icons-vue";
 import { ref } from "vue";
-import ShowView from "@/components/show/showView.vue";
+import ShowView from "@/views/show/showView.vue";
 import axios from "axios";
 import {mapActions, mapState, useStore} from 'vuex';
 const loggedIn = ref(false);

@@ -13,11 +13,11 @@
     <div class="baseArticleEntity-tag">
         <el-button class="tag"     color="#626aef" :dark="isDark"  @click="fetchData">全部</el-button>
         <div v-for="o in TagData">
-            <el-button class="tag"  style="background-color: #444654" :dark="isDark"  @click="getTagList(o.tid)">{{o.tname}}</el-button>
+            <el-button class="tag"  style="background-color: #444654" :dark="isDark"  @click="getTagList(o.tagid)">{{o.tagname}}</el-button>
         </div>
     </div>
     <div v-loading="loading" >
-        <el-card  v-for="o in tableData" :key="o"  :data="tableData" class="box-card"   shadow="hover"  @click="getin(o.aid)" >
+        <el-card  v-for="o in tableData" :key="o"  :data="tableData" class="box-card"   shadow="hover"  @click="getin(o.articleid)" >
             <div style="height: 100%;width: 100%;">
                 <div class="card-header">
                     <div>{{o.title}}</div>
@@ -35,6 +35,7 @@
 import {onMounted, ref} from "vue";
 import {get,post} from "@/net";
 import router from "@/router";
+import axios from "axios";
 const loading = ref(true)
 const TagData = ref([]);
 const getin = (e) =>{
@@ -50,27 +51,43 @@ const tagName = ref([''])
 
 //获取文章列表
 const fetchData = () => {
-    get('/api/baseArticleEntity/list', (msg) => {
-        tableData.value = msg; // 使用ref的.value属性来更新数据
-    });
-    loading.value = false
+  axios.get('/api/article/list')
+      .then(response => {
+        console.log(response)
+        // 请求成功处理
+        tableData.value = response.data.result;// 将获取到的数据赋值给 tableData
+        loading.value = false
+      })
+      .catch(error => {
+        // 请求失败处理
+        console.error('Error:', error);
+        // 在这里处理请求失败的情况，例如提示用户或者进行其他处理
+      });
 }
 
 //获取标签列表
 const fetchTagData = () => {
-    get('/api/tag/list', (msg) => {
-        TagData.value = msg; // 使用ref的.value属性来更新数据
-    });
-    loading.value = false
+  axios.get('/api/tag/list')
+      .then(response => {
+        console.log(response)
+        // 请求成功处理
+        TagData.value = response.data.result;// 将获取到的数据赋值给 tableData
+      })
+      .catch(error => {
+        // 请求失败处理
+        console.error('Error:', error);
+        // 在这里处理请求失败的情况，例如提示用户或者进行其他处理
+      });
 }
 
 //根据标签选项获取文章列表
 const getTagList= (tid) => {
-    post('/api/baseArticleEntity/tag-list',{
-        tid:tid
-    } ,(msg) => {
-        console.log(msg)
-        tableData.value = msg; // 使用ref的.value属性来更新数据
+    axios.post('/api/article/taglist', null, {
+      params: {
+        tagid: tid // 将tagid作为URL参数传递
+      }
+    }).then(res => {
+      tableData.value = res.data.result;
     });
     loading.value = false
 }
@@ -122,4 +139,4 @@ onMounted(() => {
 }
 
 </style>
-    
+

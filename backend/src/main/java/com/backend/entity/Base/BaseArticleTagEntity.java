@@ -20,19 +20,19 @@ public class BaseArticleTagEntity extends BaseEntity implements Serializable {
      *  文章标签ID
      */
     @TableId(type = IdType.ASSIGN_ID)
-    BigDecimal articletagid;
+    String articletagid;
 
 
     /**
      *  文章ID
      */
     @TableField(value = "articleid")
-    BigDecimal articleid;
+    String articleid;
 
 
     /**
      *  标签ID
      */
     @TableField(value = "tagid")
-    BigDecimal tagid;
+    String tagid;
 }

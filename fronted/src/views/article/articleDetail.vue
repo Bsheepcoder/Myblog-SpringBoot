@@ -6,7 +6,10 @@
           </div>
 
           <h1 class="page-header">{{pageinfo.title}}</h1>
-          <p  class="page-time">更新时间：{{pageinfo.updateTime}} / 创建时间：{{pageinfo.createTime}} / 访问人数：{{pageinfo.visitCount}} </p>
+          <p  class="page-time">
+            <span style="margin-right: 10px"><el-icon style="vertical-align: -11%;"><Clock /></el-icon>更新时间：{{ pageinfo.updateTime !== '' && pageinfo.updateTime !== null ? pageinfo.updateTime : pageinfo.createTime}} </span>
+            <span> <el-icon style="vertical-align: -11%;"><Clock /></el-icon>创建时间：{{pageinfo.createTime}}  </span>
+          </p>
 
 
           <el-container  class="page-container">
@@ -53,6 +56,7 @@ import {MdEditor} from 'md-editor-v3';
 import 'md-editor-v3/lib/preview.css';
 import { MdPreview, MdCatalog } from 'md-editor-v3';
 import AboutMeCard from "../aboutMeCard.vue";
+import axios from "axios";
 const loading = ref(true)
 
 const id = 'preview-only';
@@ -63,7 +67,6 @@ const pageinfo  = ref([]);
 const route = useRoute();
 const aid = ref('');
 let text = ref("");
-
 const top = ref(0);
 
 const handleWindowScroll = () => {
@@ -73,12 +76,12 @@ const handleWindowScroll = () => {
 onMounted(() => {
     aid.value = <string>route.params.aid;
     console.log('Aid:', aid.value);
-    get("/api/baseArticleEntity/page?aid=" + aid.value, (message) => {
-        console.log(message)
-        pageinfo.value = message
-        text1.value = pageinfo.value.content
-
-    });
+    axios.get("/api/article/page?aid=" + aid.value)
+        .then( res => {
+          console.log(res)
+          pageinfo.value = res.data.result
+          text1.value = pageinfo.value.content
+        })
     loading.value = false
     top.value = window.scrollY;
     window.addEventListener('scroll', handleWindowScroll);
@@ -137,4 +140,4 @@ onBeforeUnmount(() => {
     }
 }
 </style>
-    
+

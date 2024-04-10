@@ -18,6 +18,8 @@ import lombok.EqualsAndHashCode;
 @Schema(name = "标签-修改保存参数",description = "标签-修改保存参数")
 public class SaveParam extends Param {
 
+    @ApiModelProperty(value = "标签ID")
+    String tagid;
 
     @ApiModelProperty(value = "父级ID")
     String parent;
@@ -27,5 +29,7 @@ public class SaveParam extends Param {
 
     @ApiModelProperty(value = "标签名")
     String tagname;
+
+
 
 }
